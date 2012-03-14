@@ -1,5 +1,6 @@
 package com.opportunity.poimanageservice.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Id;
@@ -10,7 +11,9 @@ import com.googlecode.objectify.annotation.Unindexed;
 import com.opportunity.poimanageservice.model.dto.ShopInformation;
 
 @Unindexed
-public class ShopDetails {
+public class ShopDetails implements Serializable {
+
+	private static final long serialVersionUID = -4375383331673481111L;
 
 	@Id
 	private Long Id;
