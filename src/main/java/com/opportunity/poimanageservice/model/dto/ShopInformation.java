@@ -4,27 +4,46 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import com.opportunity.poimanageservice.model.ShopDetails;
+
 
 public class ShopInformation {
-	
+
 	private String shopName;
-	
+
 	private int zipCode;
-	
-	private String Country;
-	
+
+	private String country;
+
 	private String street;
-	
+
 	private int number;
-	
+
 	private String geoLocation;
-	
+
 	private String shopType;
-	
+
 	private String subType;
-	
+
 	private String description;
-	
+
+	public ShopInformation(){
+
+	}
+
+	public ShopInformation(ShopDetails shopDetails){
+
+	  shopName = shopDetails.getShopName();
+	  zipCode = shopDetails.getZipCode();
+	  street = shopDetails.getStreet();
+	  number = shopDetails.getNumber();
+	  shopType = shopDetails.getShopType();
+	  subType = shopDetails.getSubType();
+	  description = shopDetails.getDescription();
+	  country = shopDetails.getCountry();
+	  geoLocation = shopDetails.getGeoLocation();
+	}
+
 	@NotNull
 	public String getShopName() {
 		return shopName;
@@ -33,7 +52,7 @@ public class ShopInformation {
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
 	}
-	
+
 	@NotNull
 	@Max(value=100000)
 	public int getZipCode() {
@@ -43,14 +62,14 @@ public class ShopInformation {
 	public void setZipCode(int zipCode) {
 		this.zipCode = zipCode;
 	}
-	
+
 	@NotNull
 	public String getCountry() {
-		return Country;
+		return country;
 	}
 
 	public void setCountry(String country) {
-		Country = country;
+		this.country = country;
 	}
 
 	public String getStreet() {
@@ -60,7 +79,7 @@ public class ShopInformation {
 	public void setStreet(String street) {
 		this.street = street;
 	}
-	
+
 	@Max(value=10000)
 	public int getNumber() {
 		return number;
@@ -69,7 +88,7 @@ public class ShopInformation {
 	public void setNumber(int number) {
 		this.number = number;
 	}
-	
+
 	@Pattern(regexp="\\d+,\\d+")
 	public String getGeoLocation() {
 		return geoLocation;
@@ -102,5 +121,5 @@ public class ShopInformation {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 }

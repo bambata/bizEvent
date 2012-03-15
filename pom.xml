@@ -14,7 +14,7 @@
 
     <repositories>
         <repository>
-            <id>objectify-appengine</id>
+            <id>objectifyAppengine</id>
             <name>Objectify Maven Repository</name>
             <url>http://objectify-appengine.googlecode.com/svn/maven</url>
         </repository>
@@ -227,8 +227,9 @@
         Eclipse plug-in).
         -->
         <gae.version>1.6.3.1</gae.version>
-        
-        
+
+        <gaeApplicationName>ShopManageService</gaeApplicationName>
+
         <org.springframework.version>3.1.1.RELEASE</org.springframework.version>
 
         <!--

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
@@ -19,21 +20,21 @@ import com.opportunity.poimanageservice.model.dto.ShopInformation;
 @RequestMapping("/shopManagementService")
 public final class ShopManagementService {
 
-	@RequestMapping(value = "/shop/{shopId}/{shopDetailsId}.*", method = RequestMethod.GET)
-	public void getInformationOfShop(@PathVariable String shopId,
+	@RequestMapping(value = "/shop/{shopId:\\d*}/{shopDetailsId:\\d*}.*", method = RequestMethod.GET)
+	public @ResponseBody ShopInformation getInformationOfShop(@PathVariable String shopId,
 			@PathVariable String shopDetailsId, ModelMap model) {
 
 		String key = shopId + "," + shopDetailsId;
 		MemcacheService syncCache = MemcacheServiceFactory.getMemcacheService();
 		ShopDetails shopDetails = (ShopDetails) syncCache.get(key);
-		
+
 		if (shopDetails == null) {
 			ShopDAO shopDAO = new ShopDAOObjectifyImplementation();
 			shopDetails = shopDAO.retrieveShopDetails(new Long(shopId), new Long(shopDetailsId));
 			syncCache.put(key, shopDetails);
 		}
 
-		model.addAttribute("shopDetails", shopDetails);
+		return new ShopInformation(shopDetails);
 	}
 
 	@RequestMapping(value = "/shoplist/{shopIdList}.*", method = RequestMethod.GET)
