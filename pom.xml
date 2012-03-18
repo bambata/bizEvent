@@ -153,20 +153,6 @@
         	<type>jar</type>
         	<scope>compile</scope>
         </dependency>
-        <dependency>
-        	<groupId>com.google.appengine</groupId>
-        	<artifactId>appengine-api-labs</artifactId>
-        	<version>1.6.3.1</version>
-        	<type>jar</type>
-        	<scope>compile</scope>
-        </dependency>
-        <dependency>
-        	<groupId>com.google.appengine</groupId>
-        	<artifactId>appengine-api-stubs</artifactId>
-        	<version>1.6.3.1</version>
-        	<type>jar</type>
-        	<scope>compile</scope>
-        </dependency>
     </dependencies>
 
     <build>

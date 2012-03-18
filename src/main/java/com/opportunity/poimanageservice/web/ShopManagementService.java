@@ -2,6 +2,7 @@ package com.opportunity.poimanageservice.web;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,10 +36,9 @@ import com.opportunity.poimanageservice.model.dto.ZoneHubInformation;
 @RequestMapping("/shopManagementService")
 public final class ShopManagementService {
 
-	@RequestMapping(value = "/shop/{shopId:\\d*}", method = RequestMethod.GET)
+	@RequestMapping(value = "/shop/{shopId:\\d+}", method = RequestMethod.GET)
 	public @ResponseBody
-	ShopInformation getInformationOfShop(@PathVariable String shopId,
-			@PathVariable String shopDetailsId, ModelMap model) {
+	ShopInformation getInformationOfShop(@PathVariable String shopId, ModelMap model) throws ResourceDoesNotExistException {
 
 		String key = shopId;
 		MemcacheService syncCache = MemcacheServiceFactory.getMemcacheService();
@@ -47,17 +47,21 @@ public final class ShopManagementService {
 		if (shopDetails == null) {
 			ShopDAO shopDAO = new ShopDAOObjectifyImplementation();
 			shopDetails = shopDAO.retrieveShopDetails(new Long(shopId));
-			syncCache.put(key, shopDetails);
 		}
-
+		
+		if(shopDetails == null)
+			throw new ResourceDoesNotExistException("Shop with id " + shopId + " does not exist in datastore.");
+		
+		syncCache.put(key, shopDetails);
+		
 		return new ShopInformation(shopDetails);
 	}
 
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/shop/{listOfShopId:\\d*}", method = RequestMethod.GET)
+	@RequestMapping(value = "/shop/list/{listOfShopId:\\d+(,\\d*)*}", method = RequestMethod.GET)
 	public @ResponseBody
 	Map<Long, ShopInformation> getInformationOfShopList(
-			@PathVariable String listOfShopId) {
+			@PathVariable String listOfShopId) throws ResourceDoesNotExistException {
 
 		String[] shopIds = listOfShopId.split(",");
 
@@ -81,10 +85,16 @@ public final class ShopManagementService {
 			ShopDAO shopDAO = new ShopDAOObjectifyImplementation();
 			Map<Long, ShopDetails> result = shopDAO
 					.retrieveListOfShopDetails(keys);
+			
+			shopDetails = new HashMap<Long, ShopInformation>();
+			
 			for (Long key : result.keySet()) {
-				if (shopDetails != null)
-					shopDetails.put(key, new ShopInformation(result.get(key)));
+				shopDetails.put(key, new ShopInformation(result.get(key)));
 			}
+			
+			if(shopDetails.isEmpty())
+				throw new ResourceDoesNotExistException("None of the shop exists, " + listOfShopId);
+				
 			syncCache.put(cacheKey, shopDetails);
 		}
 
@@ -100,6 +110,7 @@ public final class ShopManagementService {
 		List<ZoneHub> zoneHubs = shopDAO.retrieveHubsInLargeGeoBox(location);
 		
 		List<ZoneHubInformation> toReturn = new ArrayList<ZoneHubInformation>();
+		
 		for(ZoneHub hub : zoneHubs){
 			
 			toReturn.add(new ZoneHubInformation(hub));
@@ -126,16 +137,26 @@ public final class ShopManagementService {
 	}
 	
 
-    @ExceptionHandler
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ResponseBody
     public String handleMethodArgumentNotValidException(
             MethodArgumentNotValidException error) {
         
     	BindingResult validationResult = error.getBindingResult();
-    	List<ObjectError> errors = validationResult.getAllErrors();
     	
     	return "Bad request: " + error.getMessage();
+    	
+    }
+    
+    
+    @ExceptionHandler(ResourceDoesNotExistException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public String handleMethodArgumentNotValidException(
+            ResourceDoesNotExistException error) {
+        
+    	return "Not found: " + error.getMessage();
     	
     }
 	
