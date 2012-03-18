@@ -24,7 +24,7 @@ public class ShopDetails implements Serializable {
 
 	private int zipCode;
 
-	private String Country;
+	private String country;
 
 	private String street;
 
@@ -62,6 +62,8 @@ public class ShopDetails implements Serializable {
 		
 		description = shopInformation.getDescription();
 		
+		country = shopInformation.getCountry();
+		
 		registrationDate = new Date();
 		
 	}
@@ -92,11 +94,11 @@ public class ShopDetails implements Serializable {
 	}
 
 	public String getCountry() {
-		return Country;
+		return country;
 	}
 
 	public void setCountry(String country) {
-		Country = country;
+		this.country = country;
 	}
 
 	public String getStreet() {
@@ -153,6 +155,14 @@ public class ShopDetails implements Serializable {
 
 	public void setRegistrationDate(Date registrationDate) {
 		this.registrationDate = registrationDate;
+	}
+	
+	public Key<Shop> getShop() {
+		return shop;
+	}
+
+	public void setShop(Key<Shop> shop) {
+		this.shop = shop;
 	}
 	
 }

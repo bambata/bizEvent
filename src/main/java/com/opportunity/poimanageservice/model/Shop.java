@@ -27,6 +27,8 @@ public class Shop {
     
     private Key<ShopDetails> shopDetailsId;
     
+    private Key<ZoneHub> hub;
+    
     private String XMPPTopicName;
     
     
@@ -92,6 +94,14 @@ public class Shop {
 
 	public void setShopType(String shopType) {
 		this.shopType = shopType;
+	}
+
+	public void setHub(Key<ZoneHub> hub) {
+		this.hub = hub;
+	}
+
+	public Key<ZoneHub> getHub() {
+		return hub;
 	}
     
 }

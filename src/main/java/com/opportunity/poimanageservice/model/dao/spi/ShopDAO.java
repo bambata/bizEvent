@@ -6,16 +6,17 @@ import java.util.Map;
 import com.googlecode.objectify.Key;
 import com.opportunity.poimanageservice.model.Shop;
 import com.opportunity.poimanageservice.model.ShopDetails;
+import com.opportunity.poimanageservice.model.ZoneHub;
 import com.opportunity.poimanageservice.model.dto.ShopInformation;
 
 public interface ShopDAO {
 
-	public List<Shop> retrieveListOfMasterShopAtLargeScale(String location);
+	ShopDetails retrieveShopDetails(Long shopKey);
 	
-	public Map<Key<ShopDetails>, ShopDetails> retrieveListOfShopDetails(Map<Long, Long> keys);
+	List<Key<?>> persistShop(ShopInformation shopInformation);
 	
-	public ShopDetails retrieveShopDetails(Long shopKey, Long shopDetailsKey);
-	
-	public void persistShop(ShopInformation shopInformation);
+	Map<Long, ShopDetails> retrieveListOfShopDetails(List<Long> keys);
+
+	List<ZoneHub> retrieveHubsInLargeGeoBox(String location);
 	
 }
