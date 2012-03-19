@@ -17,6 +17,6 @@ public interface ShopDAO {
 	
 	Map<Long, ShopDetails> retrieveListOfShopDetails(List<Long> keys);
 
-	List<ZoneHub> retrieveHubsInLargeGeoBox(String location);
+	List<ZoneHub> retrieveHubsInGeoBox(String location);
 	
 }

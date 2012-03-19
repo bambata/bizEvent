@@ -40,17 +40,8 @@ public class ShopDAOObjectifyImplementation extends DAOBase implements ShopDAO {
 
 	private Long parentKey;
 
-	private List<Long> shopDetailsIds;
-
-	private Map<Key<ShopDetails>, ShopDetails> shopDetailsKeys;
-
 	@Override
-	public List<ZoneHub> retrieveHubsInLargeGeoBox(String location) {
-
-		String[] coordinates = location.split(",");
-
-		String geoBox = GeoBoxUtils.computeGeoBox(coordinates[0],
-				coordinates[1], ModelConstants.LARGE_GEO_BOX_RESOLUTION, 1);
+	public List<ZoneHub> retrieveHubsInGeoBox(String geoBox) {
 
 		return ofy().query(ZoneHub.class)
 				.filter("geoBoxLargeResolution", geoBox).list();
@@ -59,37 +50,17 @@ public class ShopDAOObjectifyImplementation extends DAOBase implements ShopDAO {
 
 	@Override
 	public Map<Long, ShopDetails> retrieveListOfShopDetails(List<Long> keys) {
-
-		this.shopDetailsIds = keys;
-
-		DAOT.repeatInTransaction((new Transactable() {
-
-			@Override
-			public void run(DAOT daot) {
-
-				Map<Long, Shop> parents = daot.ofy().get(Shop.class, shopDetailsIds);
-
-				List<Key<ShopDetails>> listOfKeys = new ArrayList<Key<ShopDetails>>();
-
-				for (Long key : parents.keySet()) {
-					Shop shop = parents.get(key);
-					listOfKeys.add(shop.getShopDetailsId());
-				}
-
-				shopDetailsKeys = daot.ofy().get(ShopDetails.class, listOfKeys);
-			}
-
-		}));
-
+		
 		Map<Long, ShopDetails> toReturn = new HashMap<Long, ShopDetails>();
-
-		for (Map.Entry<Key<ShopDetails>, ShopDetails> entry : shopDetailsKeys
-				.entrySet()) {
-
-			toReturn.put(entry.getKey().getId(), entry.getValue());
-
+		
+		for(Long key : keys){
+			
+			ShopDetails shopDetails = retrieveShopDetails(key);
+			if(shopDetails != null)
+				toReturn.put(key, shopDetails);
+			
 		}
-
+		
 		return toReturn;
 
 	}
