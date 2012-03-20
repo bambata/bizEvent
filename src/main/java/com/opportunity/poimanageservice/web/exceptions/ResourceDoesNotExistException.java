@@ -1,4 +1,4 @@
-package com.opportunity.poimanageservice.web;
+package com.opportunity.poimanageservice.web.exceptions;
 
 import javax.servlet.ServletException;
 
