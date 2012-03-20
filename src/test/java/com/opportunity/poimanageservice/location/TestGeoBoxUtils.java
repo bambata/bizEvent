@@ -1,6 +1,9 @@
 package com.opportunity.poimanageservice.location;
 
 import org.junit.Test;
+
+import com.opportunity.webservices.location.GeoBoxUtils;
+
 import static org.junit.Assert.*;
 
 public class TestGeoBoxUtils {
