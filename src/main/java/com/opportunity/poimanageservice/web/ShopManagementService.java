@@ -32,6 +32,7 @@ import com.opportunity.poimanageservice.model.dao.ShopDAOObjectifyImplementation
 import com.opportunity.poimanageservice.model.dao.spi.ShopDAO;
 import com.opportunity.poimanageservice.model.dto.ShopInformation;
 import com.opportunity.poimanageservice.model.dto.ZoneHubInformation;
+import com.opportunity.poimanageservice.web.exceptions.ResourceDoesNotExistException;
 
 @Controller
 @RequestMapping("/shopManagementService")
