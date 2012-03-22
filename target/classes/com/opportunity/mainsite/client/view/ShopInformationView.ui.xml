@@ -1,15 +1,24 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-  xmlns:g="urn:import:com.google.gwt.user.client.ui" ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
-  ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
-  ui:generateLocales="default">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+	ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+	ui:generateLocales="default">
 
-  <g:FormPanel method="post" action="javascript:;">
-    <g:HTMLPanel>
-      <g:ListBox ui:field="" name="">
-        <g:item></g:item>
-      </g:ListBox>
-    </g:HTMLPanel>
-  </g:FormPanel>
+	<div>
+		<p>
+			<g:Label>Shop Name</g:Label>
+			<br />
+			<g:TextBox ui:field="shopName" />
+		</p>
+		<p>
+			<g:Label>Shop Type</g:Label>
+			<br />
+			<g:ListBox ui:field="shopType">
+				<g:item>Food</g:item>
+				<g:item>Sport</g:item>
+				<g:item>Leisure</g:item>
+			</g:ListBox>
+		</p>
+	</div>
 
 </ui:UiBinder>
