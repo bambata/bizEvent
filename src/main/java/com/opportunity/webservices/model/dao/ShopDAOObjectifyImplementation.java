@@ -1,4 +1,4 @@
-package com.opportunity.poimanageservice.model.dao;
+package com.opportunity.webservices.model.dao;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,15 +10,16 @@ import com.googlecode.objectify.Key;
 import com.googlecode.objectify.NotFoundException;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.util.DAOBase;
-import com.opportunity.poimanageservice.location.GeoBoxUtils;
-import com.opportunity.poimanageservice.model.ModelConstants;
-import com.opportunity.poimanageservice.model.Shop;
-import com.opportunity.poimanageservice.model.ShopDetails;
-import com.opportunity.poimanageservice.model.ZoneHub;
-import com.opportunity.poimanageservice.model.dao.spi.ShopDAO;
-import com.opportunity.poimanageservice.model.dto.ShopInformation;
-import com.opportunity.poimanageservice.model.dao.DAOT;
-import static com.opportunity.poimanageservice.model.dao.DAOT.*;
+import com.opportunity.webservices.location.GeoBoxUtils;
+import com.opportunity.webservices.model.ModelConstants;
+import com.opportunity.webservices.model.Shop;
+import com.opportunity.webservices.model.ShopDetails;
+import com.opportunity.webservices.model.ZoneHub;
+import com.opportunity.webservices.model.dao.DAOT;
+import com.opportunity.webservices.model.dao.spi.ShopDAO;
+import com.opportunity.webservices.model.dto.ShopInformation;
+
+import static com.opportunity.webservices.model.dao.DAOT.*;
 
 public class ShopDAOObjectifyImplementation extends DAOBase implements ShopDAO {
 

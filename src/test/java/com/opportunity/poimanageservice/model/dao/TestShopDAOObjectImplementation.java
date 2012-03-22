@@ -13,14 +13,15 @@ import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
-import com.opportunity.poimanageservice.location.GeoBoxUtils;
-import com.opportunity.poimanageservice.model.ModelConstants;
-import com.opportunity.poimanageservice.model.Shop;
-import com.opportunity.poimanageservice.model.ShopDetails;
-import com.opportunity.poimanageservice.model.ShopType;
-import com.opportunity.poimanageservice.model.ZoneHub;
-import com.opportunity.poimanageservice.model.dao.spi.ShopDAO;
-import com.opportunity.poimanageservice.model.dto.ShopInformation;
+import com.opportunity.webservices.location.GeoBoxUtils;
+import com.opportunity.webservices.model.ModelConstants;
+import com.opportunity.webservices.model.Shop;
+import com.opportunity.webservices.model.ShopDetails;
+import com.opportunity.webservices.model.ShopType;
+import com.opportunity.webservices.model.ZoneHub;
+import com.opportunity.webservices.model.dao.ShopDAOObjectifyImplementation;
+import com.opportunity.webservices.model.dao.spi.ShopDAO;
+import com.opportunity.webservices.model.dto.ShopInformation;
 
 public class TestShopDAOObjectImplementation {
 

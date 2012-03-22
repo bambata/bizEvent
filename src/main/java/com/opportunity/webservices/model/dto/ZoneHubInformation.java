@@ -1,6 +1,6 @@
-package com.opportunity.poimanageservice.model.dto;
+package com.opportunity.webservices.model.dto;
 
-import com.opportunity.poimanageservice.model.ZoneHub;
+import com.opportunity.webservices.model.ZoneHub;
 
 public class ZoneHubInformation {
 

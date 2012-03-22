@@ -1,4 +1,4 @@
-package com.opportunity.poimanageservice.model.dao;
+package com.opportunity.webservices.model.dao;
 
 import java.util.ConcurrentModificationException;
 import org.slf4j.Logger;

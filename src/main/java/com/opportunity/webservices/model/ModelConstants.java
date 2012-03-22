@@ -1,4 +1,4 @@
-package com.opportunity.poimanageservice.model;
+package com.opportunity.webservices.model;
 
 public class ModelConstants {
 	

@@ -1,13 +1,13 @@
-package com.opportunity.poimanageservice.model.dao.spi;
+package com.opportunity.webservices.model.dao.spi;
 
 import java.util.List;
 import java.util.Map;
 
 import com.googlecode.objectify.Key;
-import com.opportunity.poimanageservice.model.Shop;
-import com.opportunity.poimanageservice.model.ShopDetails;
-import com.opportunity.poimanageservice.model.ZoneHub;
-import com.opportunity.poimanageservice.model.dto.ShopInformation;
+import com.opportunity.webservices.model.Shop;
+import com.opportunity.webservices.model.ShopDetails;
+import com.opportunity.webservices.model.ZoneHub;
+import com.opportunity.webservices.model.dto.ShopInformation;
 
 public interface ShopDAO {
 

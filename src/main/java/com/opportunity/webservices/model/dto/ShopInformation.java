@@ -1,10 +1,10 @@
-package com.opportunity.poimanageservice.model.dto;
+package com.opportunity.webservices.model.dto;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-import com.opportunity.poimanageservice.model.ShopDetails;
+import com.opportunity.webservices.model.ShopDetails;
 
 
 public class ShopInformation {

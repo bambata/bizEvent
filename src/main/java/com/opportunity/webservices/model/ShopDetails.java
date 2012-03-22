@@ -1,4 +1,4 @@
-package com.opportunity.poimanageservice.model;
+package com.opportunity.webservices.model;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Parent;
 import com.googlecode.objectify.annotation.Unindexed;
-import com.opportunity.poimanageservice.model.dto.ShopInformation;
+import com.opportunity.webservices.model.dto.ShopInformation;
 
 @Unindexed
 public class ShopDetails implements Serializable {
