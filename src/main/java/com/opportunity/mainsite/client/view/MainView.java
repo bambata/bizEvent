@@ -9,7 +9,8 @@ public class MainView {
    */
   public void go(){
 
-    RootPanel.get();
+    ShopInformationFormView shopInfoForm = new ShopInformationFormViewImpl();
+    RootPanel.get("shopForm").add(shopInfoForm.toWidget());
 
   }
 
