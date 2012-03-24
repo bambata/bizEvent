@@ -1,5 +1,6 @@
 package com.opportunity.mainsite.client;
 
+
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerManager;
@@ -9,7 +10,7 @@ import com.opportunity.mainsite.client.presenter.Presenter;
 import com.opportunity.mainsite.client.view.MainView;
 
 public class AppController implements Presenter, ValueChangeHandler<String> {
-
+	
 	private HandlerManager eventBus;
 
 	private HasWidgets container;
@@ -19,6 +20,8 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	public AppController(HandlerManager eventBus) {
 
 		this.eventBus = eventBus;
+		
+		History.addValueChangeHandler(this);
 
 	}
 
@@ -33,9 +36,9 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	@Override
 	public void onValueChange(ValueChangeEvent<String> event) {
 
-	  if(event.getValue().equals("shopRegistration")){
+	  if(event.getValue().equals(ApplicationGlobalState.shopRegistration.toString())){
 
-	    if(mainView != null)
+	    if(mainView == null)
 	      mainView = new MainView();
 
 	    mainView.go();

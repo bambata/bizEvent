@@ -86,7 +86,19 @@
 			<version>4.5</version>
 			<scope>test</scope>
 		</dependency>
-
+		
+		<!-- file upload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.2</version>
+		</dependency>	
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+		
 		<!--
 			GAE libraries for local testing as described here:
 			http://code.google.com/appengine/docs/java/howto/unittesting.html
@@ -154,6 +166,13 @@
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
 			<version>2.4.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>xalan</groupId>
+			<artifactId>xalan</artifactId>
+			<version>2.7.1</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>

@@ -34,7 +34,7 @@ public class UploadFileService {
   public @ResponseBody
   FileUrl getCallbackUrl(HttpServletRequest req, HttpServletResponse res) {
 
-    String url = blobstoreService.createUploadUrl("/uploadService");
+    String url = blobstoreService.createUploadUrl("/fileService/persistFile");
     return new FileUrl(url);
 
   }

@@ -2,6 +2,7 @@ package com.opportunity.mainsite.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.RootPanel;
 
 public class MainSite implements EntryPoint{
@@ -10,7 +11,8 @@ public class MainSite implements EntryPoint{
   public void onModuleLoad() {
 
     AppController appController = new AppController(new HandlerManager(null));
-	appController.go(RootPanel.get());
+	
+    appController.go(RootPanel.get());
 
   }
 
