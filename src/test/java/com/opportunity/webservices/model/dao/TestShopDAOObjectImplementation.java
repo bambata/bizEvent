@@ -1,7 +1,6 @@
-package com.opportunity.poimanageservice.model.dao;
+package com.opportunity.webservices.model.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;

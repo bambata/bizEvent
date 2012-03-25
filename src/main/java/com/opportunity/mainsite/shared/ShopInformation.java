@@ -1,58 +1,33 @@
 package com.opportunity.mainsite.shared;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+public class ShopInformation implements ShopInformationIF {
 
-import com.opportunity.webservices.model.ShopDetails;
-
-
-public class ShopInformation {
-	
-	@NotNull
 	private String shopName;
-	
-	@NotNull
+
 	private int zipCode;
-	
-	@NotNull
+
 	private String country;
-	
-	@NotNull
+
 	private String street;
-	
+
 	private int number;
-	
-	@NotNull
+
+	private String city;
+
 	private String geoLocation;
-	
-	@NotNull
+
 	private String shopType;
-	
-	@NotNull
+
 	private String subType;
-	
-	@NotNull
+
 	private String description;
+	
+	private String email;
 
-	public ShopInformation(){
+	public ShopInformation() {
 
 	}
 
-	public ShopInformation(ShopDetails shopDetails){
-
-	  shopName = shopDetails.getShopName();
-	  zipCode = shopDetails.getZipCode();
-	  street = shopDetails.getStreet();
-	  number = shopDetails.getNumber();
-	  shopType = shopDetails.getShopType();
-	  subType = shopDetails.getSubType();
-	  description = shopDetails.getDescription();
-	  country = shopDetails.getCountry();
-	  geoLocation = shopDetails.getGeoLocation();
-	}
-
-	@NotNull
 	public String getShopName() {
 		return shopName;
 	}
@@ -60,9 +35,15 @@ public class ShopInformation {
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
 
-	@NotNull
-	@Max(value=100000)
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public int getZipCode() {
 		return zipCode;
 	}
@@ -71,7 +52,6 @@ public class ShopInformation {
 		this.zipCode = zipCode;
 	}
 
-	@NotNull
 	public String getCountry() {
 		return country;
 	}
@@ -88,7 +68,6 @@ public class ShopInformation {
 		this.street = street;
 	}
 
-	@Max(value=10000)
 	public int getNumber() {
 		return number;
 	}
@@ -97,7 +76,6 @@ public class ShopInformation {
 		this.number = number;
 	}
 
-	@Pattern(regexp="\\d+,\\d+")
 	public String getGeoLocation() {
 		return geoLocation;
 	}
@@ -128,6 +106,14 @@ public class ShopInformation {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 }

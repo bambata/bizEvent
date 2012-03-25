@@ -176,6 +176,13 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.googlecode.gwt-validation</groupId>
+			<artifactId>gwt-validation</artifactId>
+			<version>2.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -227,6 +234,7 @@
 				<version>2.4.0</version>
 				<configuration>
 					<style>DETAILED</style>
+					<!-- <logLevel>TRACE</logLevel> -->
 				</configuration>
 				<executions>
 					<execution>

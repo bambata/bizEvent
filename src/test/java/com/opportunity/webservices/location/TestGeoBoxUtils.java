@@ -1,4 +1,4 @@
-package com.opportunity.poimanageservice.location;
+package com.opportunity.webservices.location;
 
 import org.junit.Test;
 

@@ -8,84 +8,38 @@
 		<table>
 			<tr>
 				<td>
-					<ui:msg description="Shop Name">Shop Name</ui:msg>
+					<ui:msg description="Shop Name">Shop Name</ui:msg>:
 				</td>
 				<td>
 					<g:TextBox ui:field="shopName" />
 				</td>
 			</tr>
+			
 			<tr>
 				<td>
-					<ui:msg description="Shop Type">Shop Type</ui:msg>
-					:
+					<ui:msg description="Shop Type">Shop Type</ui:msg>:
 				</td>
 				<td>
 					<g:ListBox ui:field="shopType">
-						<g:item>France</g:item>
-						<g:item>Brésil</g:item>
-						<g:item>Allemagne</g:item>
-						<g:item>Cameroun</g:item>
+						<g:item>Food</g:item>
+						<g:item>Leisure</g:item>
+						<g:item>Sport</g:item>
 					</g:ListBox>
 				</td>
 			</tr>
+			
 			<tr>
 				<td>
-					<ui:msg description="Street">Street</ui:msg>
-					:
+					<ui:msg description="shopEmail">Shop Email</ui:msg>:
 				</td>
 				<td>
-					<g:TextBox ui:field="street" />
+					<g:TextBox ui:field="email"></g:TextBox>
 				</td>
 			</tr>
+			
 			<tr>
 				<td>
-					<ui:msg description="Number">Number</ui:msg>
-					:
-				</td>
-				<td>
-					<g:TextBox ui:field="number" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<ui:msg description="Description">Description</ui:msg>
-					:
-				</td>
-				<td>
-					<g:TextArea ui:field="description" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<ui:msg description="City">City</ui:msg>
-					:
-				</td>
-				<td>
-					<g:TextBox ui:field="city" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<ui:msg description="State">State</ui:msg>
-					:
-				</td>
-				<td>
-					<g:TextBox ui:field="state" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<ui:msg description="Zip">Zip</ui:msg>
-					:
-				</td>
-				<td>
-					<g:TextBox ui:field="zip" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<ui:msg description="Country">Country</ui:msg>
-					:
+					<ui:msg description="Country">Country</ui:msg>:
 				</td>
 				<td>
 					<g:ListBox ui:field="country">
@@ -96,9 +50,61 @@
 					</g:ListBox>
 				</td>
 			</tr>
-
+			
 			<tr>
 				<td>
+					<ui:msg description="State">State</ui:msg>:
+				</td>
+				<td>
+					<g:TextBox ui:field="state" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<ui:msg description="Zip">Zip</ui:msg>:
+				</td>
+				<td>
+					<g:TextBox ui:field="zip" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<ui:msg description="City">City</ui:msg>:
+				</td>
+				<td>
+					<g:TextBox ui:field="city" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<ui:msg description="Street">Street</ui:msg>:
+				</td>
+				<td>
+					<g:TextBox ui:field="street" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<ui:msg description="Number">Number</ui:msg>:
+				</td>
+				<td>
+					<g:TextBox ui:field="number" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<ui:msg description="Description">Description</ui:msg>:
+				</td>
+				<td>
+					<g:TextArea ui:field="description" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td align="right">
 					<g:Button ui:field="submitButton" text="submit" />
 				</td>
 				<td align="right">

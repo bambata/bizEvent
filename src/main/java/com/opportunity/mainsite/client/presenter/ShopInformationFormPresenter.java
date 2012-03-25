@@ -9,9 +9,13 @@ import javax.validation.Validator;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.web.bindery.autobean.shared.AutoBean;
+import com.google.web.bindery.autobean.shared.AutoBeanCodex;
+import com.opportunity.mainsite.client.AppController;
 import com.opportunity.mainsite.client.view.widget.ShopInformationForm;
 import com.opportunity.mainsite.client.view.widget.ShopInformationFormWidget;
 import com.opportunity.mainsite.shared.ShopInformation;
+import com.opportunity.mainsite.shared.ShopInformationIF;
 
 public class ShopInformationFormPresenter implements ShopInformationForm.ShopInformationFormObserver, Presenter  {
 	
@@ -31,7 +35,10 @@ public class ShopInformationFormPresenter implements ShopInformationForm.ShopInf
 	@Override
 	public void onSubmitButtonClick(Map<String, String> values) {
 		
-		ShopInformation info = new ShopInformation();
+		AutoBean<ShopInformationIF> autoBean = AppController.applicationAutoBeanFactory.shopInformation();
+		
+		//create the bean
+		ShopInformationIF info = autoBean.as();
 		info.setCountry(values.get("country"));
 		info.setDescription(values.get("description"));
 		info.setNumber(Integer.parseInt(values.get("number")));
@@ -39,16 +46,23 @@ public class ShopInformationFormPresenter implements ShopInformationForm.ShopInf
 		info.setShopName(values.get("shopName"));
 		info.setShopType(values.get("shopType"));
 		
+		//validate the bean
 		Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-		Set<ConstraintViolation<ShopInformation>> violations = validator.validate(info);
+		Set<ConstraintViolation<ShopInformationIF>> violations = validator.validate(info);
 		
 		if(violations.isEmpty()){
-			
+		
+			AutoBeanCodex.encode(autoBean).getPayload();
+		
 		}else{
 			
-		}
+			handleErrors();
 			
+		}
 		
+	}
+
+	private void handleErrors() {
 		
 	}
 
