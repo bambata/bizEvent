@@ -12,9 +12,13 @@
 
 	<!-- Other module inherits -->
 
+  <!-- for logging capability -->
+  <inherits name="com.google.gwt.logging.Logging"/>
+
 	<!-- I18N -->
 	<inherits name="com.google.gwt.i18n.I18N" />
-	
+
+  <!-- Bean Json mapping -->
 	<inherits name="com.google.web.bindery.autobean.AutoBean" />
 
 	<!-- HTTP calling service -->
@@ -22,18 +26,15 @@
 
 	<!-- JSR 303 Bean Validation -->
 	<inherits name='com.em.validation.Validation' />
-	
+
 	<!-- Specify the app entry point class. -->
 	<entry-point class='com.opportunity.mainsite.client.MainSite' />
-	
-	<!-- Bean JSON mapping -->
-	
-	
+
 	<!-- Specify the paths for translatable code -->
 	<source path='client' />
-	
+
 	<source path='shared' />
-	
-	
+
+
 
 </module>
