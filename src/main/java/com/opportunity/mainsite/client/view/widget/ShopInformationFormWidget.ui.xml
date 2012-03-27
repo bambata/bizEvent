@@ -104,6 +104,13 @@
 			</tr>
 			
 			<tr>
+				<td id="upload"></td>
+				<td>
+					<g:Button ui:field="startUploadButton" text="Upload Images"/>
+				</td>
+			</tr>
+			
+			<tr>
 				<td align="right">
 					<g:Button ui:field="submitButton" text="submit" />
 				</td>

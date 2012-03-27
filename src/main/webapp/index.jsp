@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <title>Web Application Starter Project</title>
-<script type="text/javascript" src="mainsite/mainsite.nocache.js" />
+<script type="text/javascript" src="mainsite/mainsite.nocache.js"></script>
 </head>
 
 <body>

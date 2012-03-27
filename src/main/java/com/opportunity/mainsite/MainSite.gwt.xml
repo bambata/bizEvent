@@ -26,9 +26,14 @@
 
 	<!-- JSR 303 Bean Validation -->
 	<inherits name='com.em.validation.Validation' />
+	
+	<!-- wrapper library for swfUpload -->
+	<inherits name="org.swfupload.SWFUpload"/>
 
 	<!-- Specify the app entry point class. -->
 	<entry-point class='com.opportunity.mainsite.client.MainSite' />
+	
+	
 
 	<!-- Specify the paths for translatable code -->
 	<source path='client' />

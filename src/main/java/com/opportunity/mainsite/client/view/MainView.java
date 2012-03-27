@@ -1,6 +1,7 @@
 package com.opportunity.mainsite.client.view;
 
 import com.google.gwt.user.client.ui.RootPanel;
+import com.opportunity.mainsite.client.presenter.ShopInformationFormPresenter;
 import com.opportunity.mainsite.client.view.widget.ShopInformationForm;
 import com.opportunity.mainsite.client.view.widget.ShopInformationFormWidget;
 
@@ -11,8 +12,8 @@ public class MainView {
    */
   public void go(){
 
-    ShopInformationForm shopInfoForm = new ShopInformationFormWidget();
-    RootPanel.get("shopForm").add(shopInfoForm.toWidget());
+    ShopInformationFormPresenter presenter = new ShopInformationFormPresenter();
+    presenter.go(RootPanel.get("shopForm"));
 
   }
 
