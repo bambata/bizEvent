@@ -6,8 +6,8 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 
 import com.google.gwt.user.client.ui.Widget;
-import com.opportunity.mainsite.shared.ErrorIF;
-import com.opportunity.mainsite.shared.ShopInformationIF;
+import com.opportunity.mainsite.shared.Error;
+import com.opportunity.mainsite.shared.ShopInformation;
 
 public interface ShopInformationForm {
 
@@ -21,13 +21,13 @@ public interface ShopInformationForm {
 
 	void setPresenter(ShopInformationFormObserver presenter);
 
-	void setViolations(Set<ConstraintViolation<ShopInformationIF>> violations);
+	void setViolations(Set<ConstraintViolation<ShopInformation>> violations);
 
 	Widget toWidget();
 
   void setWidgetState(ShopInformationFormState state);
 
-  void setWidgetState(ShopInformationFormState state, ErrorIF error);
+  void setWidgetState(ShopInformationFormState state, Error error);
 
   enum ShopInformationFormState {
     success,

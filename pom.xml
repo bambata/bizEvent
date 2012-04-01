@@ -145,12 +145,13 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>4.2.0.Final</version>
-			<type>jar</type>
-			<scope>compile</scope>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
+			<classifier>sources</classifier>
+			<scope>provided</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
@@ -172,14 +173,35 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+
+		<!-- patched projects -->
 		<dependency>
 			<groupId>org.swfupload</groupId>
 			<artifactId>swfupload-gwt</artifactId>
-			<version>1.1-SNAPSHOT</version>
+			<version>1.1</version>
 			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/swfupload-gwt-1.1.jar</systemPath>
 			<scope>system</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.reflections</groupId>
+			<artifactId>reflections</artifactId>
+			<version>0.9.5</version>
+		</dependency>
+
+		<!-- Joda Time Library -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+
+		<!-- gin DI for GWT client -->
+		<dependency>
+			<groupId>com.google.gwt.inject</groupId>
+			<artifactId>gin</artifactId>
+			<version>1.5.0</version>
+		</dependency>
 
 	</dependencies>
 

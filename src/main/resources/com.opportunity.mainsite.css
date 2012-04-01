@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+
+.progressBar-Widget {
+	border : 1px solid;
+	padding : 1px;
+}
+
+.progressBar-Widget div{
+	height : 0px;
+}

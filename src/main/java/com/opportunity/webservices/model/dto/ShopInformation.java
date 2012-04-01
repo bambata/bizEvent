@@ -44,7 +44,6 @@ public class ShopInformation {
 	  geoLocation = shopDetails.getGeoLocation();
 	}
 
-	@NotNull
 	public String getShopName() {
 		return shopName;
 	}
@@ -53,8 +52,6 @@ public class ShopInformation {
 		this.shopName = shopName;
 	}
 
-	@NotNull
-	@Max(value=100000)
 	public int getZipCode() {
 		return zipCode;
 	}
@@ -63,7 +60,6 @@ public class ShopInformation {
 		this.zipCode = zipCode;
 	}
 
-	@NotNull
 	public String getCountry() {
 		return country;
 	}
@@ -80,7 +76,6 @@ public class ShopInformation {
 		this.street = street;
 	}
 
-	@Max(value=10000)
 	public int getNumber() {
 		return number;
 	}
@@ -89,7 +84,6 @@ public class ShopInformation {
 		this.number = number;
 	}
 
-	@Pattern(regexp="\\d+,\\d+")
 	public String getGeoLocation() {
 		return geoLocation;
 	}

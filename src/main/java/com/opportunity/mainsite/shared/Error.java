@@ -1,6 +1,6 @@
 package com.opportunity.mainsite.shared;
 
-public class Error implements ErrorIF {
+public class Error {
 
   int errorCode;
 
@@ -14,12 +14,10 @@ public class Error implements ErrorIF {
 
   String genericMessage;
 
-  @Override
   public String getGenericMessage() {
     return null;
   }
 
-  @Override
   public int getErrorCode() {
     return 0;
   }

@@ -1,144 +1,155 @@
 package com.opportunity.mainsite.client.presenter;
 
-import java.io.File;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
 import javax.validation.Validator;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.web.bindery.autobean.shared.AutoBean;
-import com.google.web.bindery.autobean.shared.AutoBeanCodex;
-import com.opportunity.mainsite.client.AppController;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.opportunity.mainsite.client.view.widget.ShopInformationForm;
-import com.opportunity.mainsite.client.view.widget.ShopInformationFormWidget;
-import com.opportunity.mainsite.shared.ErrorIF;
-import com.opportunity.mainsite.shared.ShopInformationIF;
+import com.opportunity.mainsite.shared.ShopInformation;
 
-public class ShopInformationFormPresenter implements ShopInformationForm.ShopInformationFormObserver, Presenter {
+@Singleton
+public class ShopInformationFormPresenter implements
+		ShopInformationForm.ShopInformationFormObserver, Presenter {
 
-  private static final String SHOP_MANAGEMENT_SHOP_PERSISTER = GWT.getModuleBaseURL() +
-      "shopManagementService/shop/create";
+	private static final String SHOP_MANAGEMENT_SHOP_PERSISTER = GWT
+			.getModuleBaseURL() + "shopManagementService/shop/create";
 
-  private static final String FILE_SERVICE_CALLBACK = GWT.getModuleBaseURL() + "fileService/callbackUrl";
+	private static final String FILE_SERVICE_CALLBACK = GWT.getModuleBaseURL()
+			+ "fileService/callbackUrl";
 
-  private static Logger logger = Logger.getLogger(ShopInformationFormPresenter.class.getName());
+	private static Logger logger = Logger
+			.getLogger(ShopInformationFormPresenter.class.getName());
 
-  private ShopInformationForm view;
+	private ShopInformationForm view;
 
-  private Scheduler scheduler = Scheduler.get();
+	private Scheduler scheduler;
 
-  @Override
-  public void go(HasWidgets container) {
-    container.clear();
-    view = new ShopInformationFormWidget();
-    view.setPresenter(this);
-    container.add(view.toWidget());
-  }
+	private Validator validator;
 
-  @Override
-  public void onSubmitButtonClick(Map<String, String> values) {
+	private EventBus applicationGlobalEventBus;
 
+	public ShopInformationFormPresenter() {
 
+	}
 
-  }
+	@Inject
+	public ShopInformationFormPresenter(Scheduler scheduler,
+			Validator validator, ShopInformationForm view,
+			EventBus applicationGlobalEventBus) {
+		this.scheduler = scheduler;
+		this.validator = validator;
+		this.view = view;
+		this.applicationGlobalEventBus = applicationGlobalEventBus;
+	}
 
-  @Override
-  public void onAddedFile() {
+	@Override
+	public void go(HasWidgets container) {
+		container.clear();
+		view.setPresenter(this);
+		container.add(view.toWidget());
+	}
 
+	@Override
+	public void onSubmitButtonClick(Map<String, String> values) {
 
+		submitForm(values);
 
-  }
+	}
 
-  private void submitForm(Map<String, String> values) {
+	@Override
+	public void onAddedFile() {
 
-    AutoBean<ShopInformationIF> autoBean = AppController.applicationAutoBeanFactory.shopInformation();
+	}
 
-    // create the bean
-    ShopInformationIF info = autoBean.as();
-    info.setCountry(values.get("country"));
-    info.setDescription(values.get("description"));
-    info.setNumber(Integer.parseInt(values.get("number")));
-    info.setStreet(values.get("street"));
-    info.setShopName(values.get("shopName"));
-    info.setShopType(values.get("shopType"));
+	private void submitForm(Map<String, String> values) {
 
-    // validate the bean
-    Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-    Set<ConstraintViolation<ShopInformationIF>> violations = validator.validate(info);
+		// create the bean
+		ShopInformation info = new ShopInformation();
+		info.setCountry(values.get("country"));
+		info.setDescription(values.get("description"));
+		info.setNumber(values.get("number"));
+		info.setStreet(values.get("street"));
+		info.setShopName(values.get("shopName"));
+		info.setShopType(values.get("shopType"));
 
-    if (violations.isEmpty()) {
+		// validate the bean
+		Set<ConstraintViolation<ShopInformation>> violations = validator
+				.validate(info);
 
-      String jsonPayload = AutoBeanCodex.encode(autoBean).getPayload();
+		if (violations.isEmpty()) {
 
-      // call backend service
-      RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, SHOP_MANAGEMENT_SHOP_PERSISTER);
+			// String jsonPayload = AutoBeanCodex.encode(autoBean).getPayload();
 
-      try {
+			// call backend service
+			RequestBuilder builder = new RequestBuilder(RequestBuilder.POST,
+					SHOP_MANAGEMENT_SHOP_PERSISTER);
 
-        Request request = builder.sendRequest(jsonPayload, new RequestCallback() {
+			try {
 
-          @Override
-          public void onError(Request request, Throwable exception) {
-            logger.log(Level.WARNING, exception.getMessage());
-          }
+				Request request = builder.sendRequest(info.toString(),
+						new RequestCallback() {
 
-          @Override
-          public void onResponseReceived(Request request, Response response) {
+							@Override
+							public void onError(Request request,
+									Throwable exception) {
+								logger.log(Level.WARNING,
+										exception.getMessage());
+							}
 
-            switch (response.getStatusCode()) {
+							@Override
+							public void onResponseReceived(Request request,
+									Response response) {
 
-            // Request successfully processed
-            case 200:
-              view.setWidgetState(ShopInformationForm.ShopInformationFormState.success);
-              break;
+								switch (response.getStatusCode()) {
 
-            // functional error
-            case 500:
-              AutoBean<ErrorIF> errorAutoBeanWrapper = AutoBeanCodex.decode(AppController.applicationAutoBeanFactory,
-                  ErrorIF.class, response.getText());
-              ErrorIF error = errorAutoBeanWrapper.as();
-              view.setWidgetState(ShopInformationForm.ShopInformationFormState.error, error);
-              break;
+								// Request successfully processed
+								case 200:
+									view.setWidgetState(ShopInformationForm.ShopInformationFormState.success);
+									break;
 
-            // technical error
-            default:
-              break;
-            }
+								// functional error
+								case 500:
 
-            if (200 == response.getStatusCode()) {
+									break;
 
-            }
-            else {
-              response.getText();
+								// technical error
+								default:
+									break;
+								}
 
-            }
-          }
-        });
-      }
-      catch (RequestException e) {
+								if (200 == response.getStatusCode()) {
 
-      }
+								} else {
+									response.getText();
 
-    }
-    else {
+								}
+							}
+						});
+			} catch (RequestException e) {
 
-      view.setViolations(violations);
+			}
 
-    }
+		} else {
 
-  }
+			view.setViolations(violations);
+
+		}
+
+	}
 
 }

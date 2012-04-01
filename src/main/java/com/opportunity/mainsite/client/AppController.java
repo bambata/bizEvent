@@ -1,27 +1,27 @@
 package com.opportunity.mainsite.client;
 
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.opportunity.mainsite.client.presenter.Presenter;
-import com.opportunity.mainsite.client.view.MainView;
-import com.opportunity.mainsite.shared.ApplicationAutoBeanFactory;
+import com.opportunity.mainsite.client.presenter.ShopInformationFormPresenter;
 
+@Singleton
 public class AppController implements Presenter, ValueChangeHandler<String> {
 	
-	private HandlerManager eventBus;
+	private EventBus eventBus;
 
 	private HasWidgets container;
 
-	private MainView mainView;
+	private ShopInformationFormPresenter shopInformationFormPresenter;
 	
-	public static ApplicationAutoBeanFactory applicationAutoBeanFactory = GWT.create(ApplicationAutoBeanFactory.class);
-
-	public AppController(HandlerManager eventBus) {
+	@Inject
+	public AppController(EventBus eventBus) {
 
 		this.eventBus = eventBus;
 		
@@ -29,11 +29,11 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
 	}
 
-	public void setEventBus(HandlerManager eventBus) {
+	public void setEventBus(EventBus eventBus) {
 		this.eventBus = eventBus;
 	}
 
-	public HandlerManager getEventBus() {
+	public EventBus getEventBus() {
 		return eventBus;
 	}
 
@@ -41,12 +41,11 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	public void onValueChange(ValueChangeEvent<String> event) {
 
 	  if(event.getValue().equals(ApplicationGlobalState.shopRegistration.toString())){
-
-	    if(mainView == null)
-	      mainView = new MainView();
-
-	    mainView.go();
-
+		  
+		  shopInformationFormPresenter = MainSiteGinjector.INSTANCE.getShopInformationFormPresenter();
+		  
+		  shopInformationFormPresenter.go(container);
+		  
 	  }
 
 	}

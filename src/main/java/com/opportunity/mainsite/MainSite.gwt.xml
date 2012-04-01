@@ -12,28 +12,41 @@
 
 	<!-- Other module inherits -->
 
-  <!-- for logging capability -->
-  <inherits name="com.google.gwt.logging.Logging"/>
+	<!-- JSR 303 Bean Validation -->
+	<inherits name='com.em.validation.Validation' />
+	<inherits name='com.google.gwt.validation.Validation' />
+
+	<!-- for logging capability -->
+	<inherits name="com.google.gwt.logging.Logging" />
 
 	<!-- I18N -->
 	<inherits name="com.google.gwt.i18n.I18N" />
 
-  <!-- Bean Json mapping -->
+	<!-- Bean Json mapping -->
 	<inherits name="com.google.web.bindery.autobean.AutoBean" />
 
 	<!-- HTTP calling service -->
 	<inherits name="com.google.gwt.http.HTTP" />
 
-	<!-- JSR 303 Bean Validation -->
-	<inherits name='com.em.validation.Validation' />
-	
+	<!-- Gin dependency injection FRW -->
+	<inherits name="com.google.gwt.inject.Inject" />
+
 	<!-- wrapper library for swfUpload -->
-	<inherits name="org.swfupload.SWFUpload"/>
+	<inherits name="org.swfupload.SWFUpload" />
 
 	<!-- Specify the app entry point class. -->
 	<entry-point class='com.opportunity.mainsite.client.MainSite' />
-	
-	
+
+	<stylesheet src="_com.opportunity.mainsite.css_" />
+
+
+	<!-- Deferred binding configuration -->
+	<replace-with
+		class="com.opportunity.mainsite.client.view.widget.ShopInformationFormWidget">
+		<when-type-is
+			class="com.opportunity.mainsite.client.view.widget.ShopInformationForm" />
+	</replace-with>
+
 
 	<!-- Specify the paths for translatable code -->
 	<source path='client' />

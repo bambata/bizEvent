@@ -24,8 +24,8 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
-import com.opportunity.mainsite.shared.ErrorIF;
-import com.opportunity.mainsite.shared.ShopInformationIF;
+import com.opportunity.mainsite.shared.ShopInformation;
+import com.opportunity.mainsite.shared.Error;
 
 public class ShopInformationFormWidget extends Composite implements
 		ShopInformationForm {
@@ -36,7 +36,7 @@ public class ShopInformationFormWidget extends Composite implements
 
 	private static MyUIBinder uiBinder = GWT.create(MyUIBinder.class);
 
-	Set<ConstraintViolation<ShopInformationIF>> violations;
+	Set<ConstraintViolation<ShopInformation>> violations;
 
 	@UiField
 	TextBox shopName;
@@ -70,10 +70,13 @@ public class ShopInformationFormWidget extends Composite implements
 	
 	@UiField
 	Button startUploadButton;
+	
+	@UiField
+	TextBox email;
 
 	ShopInformationFormObserver presenter;
 
-	ErrorIF error;
+	Error error;
 
 	SWFUpload swfUpload;
 
@@ -131,13 +134,13 @@ public class ShopInformationFormWidget extends Composite implements
 		this.shopName.setText("");
 	}
 
-	public Set<ConstraintViolation<ShopInformationIF>> getViolations() {
+	public Set<ConstraintViolation<ShopInformation>> getViolations() {
 		return violations;
 	}
 
 	@Override
 	public void setViolations(
-			Set<ConstraintViolation<ShopInformationIF>> violations) {
+			Set<ConstraintViolation<ShopInformation>> violations) {
 		this.violations = violations;
 	}
 
@@ -147,7 +150,7 @@ public class ShopInformationFormWidget extends Composite implements
 	}
 
 	@Override
-	public void setWidgetState(ShopInformationFormState state, ErrorIF error) {
+	public void setWidgetState(ShopInformationFormState state, Error error) {
 		this.widgetState = state;
 		this.error = error;
 	}

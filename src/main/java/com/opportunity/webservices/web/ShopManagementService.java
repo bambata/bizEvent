@@ -35,7 +35,7 @@ import com.opportunity.webservices.model.dto.ZoneHubInformation;
 import com.opportunity.webservices.web.exceptions.ResourceDoesNotExistException;
 
 @Controller
-@RequestMapping("/shopManagementService")
+@RequestMapping("shopManagementService")
 public final class ShopManagementService {
 
   @RequestMapping(value = "/shop/{shopId:\\d+}", method = RequestMethod.GET)
