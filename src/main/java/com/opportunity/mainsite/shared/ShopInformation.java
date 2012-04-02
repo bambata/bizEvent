@@ -4,6 +4,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.google.gwt.core.client.JavaScriptObject;
+
 public class ShopInformation {
 
 	private String shopName;
@@ -143,5 +145,33 @@ public class ShopInformation {
 	public void setCity(String city) {
 		this.city = city;
 	}
+	
+	public native JavaScriptObject bridge() /*-{
+		
+		return {
+			
+			shopName : this.@com.opportunity.mainsite.shared.ShopInformation::shopName,
+			
+			shopType : this.@com.opportunity.mainsite.shared.ShopInformation::shopType,
+			
+			zipCode : this.@com.opportunity.mainsite.shared.ShopInformation::zipCode,
+			
+			country : this.@com.opportunity.mainsite.shared.ShopInformation::country,
+			
+			street : this.@com.opportunity.mainsite.shared.ShopInformation::street,
+			
+			number : this.@com.opportunity.mainsite.shared.ShopInformation::number,
+			
+			city : this.@com.opportunity.mainsite.shared.ShopInformation::city,
+			
+			geoLocation : this.@com.opportunity.mainsite.shared.ShopInformation::geoLocation,
+			
+			description : this.@com.opportunity.mainsite.shared.ShopInformation::description,
+			
+			email : this.@com.opportunity.mainsite.shared.ShopInformation::email
+		};
+		
+	}-*/;
+	
 
 }

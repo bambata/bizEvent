@@ -101,7 +101,7 @@ public class ShopInformationFormPresenter implements
 
 			try {
 
-				Request request = builder.sendRequest(info.toString(),
+				Request request = builder.sendRequest(info.bridge().toString(),
 						new RequestCallback() {
 
 							@Override

@@ -19,6 +19,25 @@
 			<name>Objectify Maven Repository</name>
 			<url>http://objectify-appengine.googlecode.com/svn/maven</url>
 		</repository>
+		<repository>
+			<id>repo</id>
+			<url>https://raw.github.com/bambata/bambata-mvn-repo/master/releases</url>
+		</repository>
+		<repository>
+			<id>snapshot-repo</id>
+			<url>https://raw.github.com/bambata/bambata-mvn-repo/master/snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>swfupload-gwt-snapshots</id>
+			<name>SWFUpload-GWT snapshot releases</name>
+			<url>http://swfupload-gwt.googlecode.com/svn/maven/snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
 	</repositories>
 
 	<dependencies>
@@ -36,6 +55,14 @@
 			<artifactId>appengine-api-1.0-sdk</artifactId>
 			<version>${gae.version}</version>
 		</dependency>
+		
+		<!-- google maps --> 
+		<dependency>
+			<groupId>com.google.gwt.maps</groupId>
+			<artifactId>gwt-maps-api-v3</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		
 
 		<!-- J2EE Servlet API. We need it to compile IndexServlet class. You can 
 			probably remove it, if you don't explicitly use Servlets. -->
@@ -177,10 +204,8 @@
 		<!-- patched projects -->
 		<dependency>
 			<groupId>org.swfupload</groupId>
-			<artifactId>swfupload-gwt</artifactId>
-			<version>1.1</version>
-			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/swfupload-gwt-1.1.jar</systemPath>
-			<scope>system</scope>
+			<artifactId>swfupload-gwt-patched</artifactId>
+			<version>1.1-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>

@@ -1,6 +1,6 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui" ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:maps="urn:import:com.google.gwt.maps.client" ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
 	ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
 	ui:generateLocales="default">
 
@@ -104,8 +104,8 @@
 			</tr>
 			
 			<tr>
-				<td id="upload"></td>
-				<td>
+				<td colspan="2">
+					<span id="upload"></span>
 					<g:Button ui:field="startUploadButton" text="Upload Images"/>
 				</td>
 			</tr>
@@ -119,6 +119,9 @@
 				</td>
 			</tr>
 		</table>
+		<div>
+			<maps:MapWidget ui:field="maps" width="150" height="150"></maps:MapWidget>
+		</div>
 	</g:HTMLPanel>
 
 </ui:UiBinder>
