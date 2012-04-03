@@ -1,127 +1,138 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:maps="urn:import:com.google.gwt.maps.client" ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
-	ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
-	ui:generateLocales="default">
+  xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:o="urn:import:com.opportunity.mainsite.client.view.widget"
+  xmlns:maps="urn:import:com.google.gwt.maps.client" ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+  ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+  ui:generateLocales="default">
 
-	<g:HTMLPanel>
-		<table>
-			<tr>
-				<td>
-					<ui:msg description="Shop Name">Shop Name</ui:msg>:
-				</td>
-				<td>
-					<g:TextBox ui:field="shopName" />
-				</td>
-			</tr>
-			
-			<tr>
-				<td>
-					<ui:msg description="Shop Type">Shop Type</ui:msg>:
-				</td>
-				<td>
-					<g:ListBox ui:field="shopType">
-						<g:item>Food</g:item>
-						<g:item>Leisure</g:item>
-						<g:item>Sport</g:item>
-					</g:ListBox>
-				</td>
-			</tr>
-			
-			<tr>
-				<td>
-					<ui:msg description="shopEmail">Shop Email</ui:msg>:
-				</td>
-				<td>
-					<g:TextBox ui:field="email"></g:TextBox>
-				</td>
-			</tr>
-			
-			<tr>
-				<td>
-					<ui:msg description="Country">Country</ui:msg>:
-				</td>
-				<td>
-					<g:ListBox ui:field="country">
-						<g:item>France</g:item>
-						<g:item>Brésil</g:item>
-						<g:item>Allemagne</g:item>
-						<g:item>Cameroun</g:item>
-					</g:ListBox>
-				</td>
-			</tr>
-			
-			<tr>
-				<td>
-					<ui:msg description="State">State</ui:msg>:
-				</td>
-				<td>
-					<g:TextBox ui:field="state" />
-				</td>
-			</tr>
-			
-			<tr>
-				<td>
-					<ui:msg description="Zip">Zip</ui:msg>:
-				</td>
-				<td>
-					<g:TextBox ui:field="zip" />
-				</td>
-			</tr>
-			
-			<tr>
-				<td>
-					<ui:msg description="City">City</ui:msg>:
-				</td>
-				<td>
-					<g:TextBox ui:field="city" />
-				</td>
-			</tr>
-			
-			<tr>
-				<td>
-					<ui:msg description="Street">Street</ui:msg>:
-				</td>
-				<td>
-					<g:TextBox ui:field="street" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<ui:msg description="Number">Number</ui:msg>:
-				</td>
-				<td>
-					<g:TextBox ui:field="number" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<ui:msg description="Description">Description</ui:msg>:
-				</td>
-				<td>
-					<g:TextArea ui:field="description" />
-				</td>
-			</tr>
-			
-			<tr>
-				<td colspan="2">
-					<span id="upload"></span>
-					<g:Button ui:field="startUploadButton" text="Upload Images"/>
-				</td>
-			</tr>
-			
-			<tr>
-				<td align="right">
-					<g:Button ui:field="submitButton" text="submit" />
-				</td>
-				<td align="right">
-					<g:Button ui:field="clear" text="clear" />
-				</td>
-			</tr>
-		</table>
-		<div>
-			<maps:MapWidget ui:field="maps" width="150" height="150"></maps:MapWidget>
-		</div>
-	</g:HTMLPanel>
+  <g:HTMLPanel>
+    <table>
+      <tr>
+        <td>
+          <ui:msg description="Shop Name">Shop Name</ui:msg>
+          :
+        </td>
+        <td>
+          <g:TextBox ui:field="shopName" />
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <ui:msg description="Shop Type">Shop Type</ui:msg>
+          :
+        </td>
+        <td>
+          <g:ListBox ui:field="shopType">
+            <g:item>Food</g:item>
+            <g:item>Leisure</g:item>
+            <g:item>Sport</g:item>
+          </g:ListBox>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <ui:msg description="shopEmail">Shop Email</ui:msg>
+          :
+        </td>
+        <td>
+          <g:TextBox ui:field="email"></g:TextBox>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <ui:msg description="Country">Country</ui:msg>
+          :
+        </td>
+        <td>
+          <g:ListBox ui:field="country">
+            <g:item>France</g:item>
+            <g:item>Brésil</g:item>
+            <g:item>Allemagne</g:item>
+            <g:item>Cameroun</g:item>
+          </g:ListBox>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <ui:msg description="State">State</ui:msg>
+          :
+        </td>
+        <td>
+          <g:TextBox ui:field="state" />
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <ui:msg description="Zip">Zip</ui:msg>
+          :
+        </td>
+        <td>
+          <g:TextBox ui:field="zip" />
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <ui:msg description="City">City</ui:msg>
+          :
+        </td>
+        <td>
+          <g:TextBox ui:field="city" />
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <ui:msg description="Street">Street</ui:msg>
+          :
+        </td>
+        <td>
+          <g:TextBox ui:field="street" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <ui:msg description="Number">Number</ui:msg>
+          :
+        </td>
+        <td>
+          <g:TextBox ui:field="number" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <ui:msg description="Description">Description</ui:msg>
+          :
+        </td>
+        <td>
+          <g:TextArea ui:field="description" />
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2">
+          <span id="upload"></span>
+          <g:Button ui:field="startUploadButton" text="Upload Images" />
+        </td>
+      </tr>
+
+      <tr>
+        <td align="right">
+          <g:Button ui:field="submitButton" text="submit" />
+        </td>
+        <td align="right">
+          <g:Button ui:field="clear" text="clear" />
+        </td>
+      </tr>
+    </table>
+    <div>
+      <maps:MapWidget ui:field="maps" width="150" height="150"></maps:MapWidget>
+    </div>
+  </g:HTMLPanel>
 
 </ui:UiBinder>

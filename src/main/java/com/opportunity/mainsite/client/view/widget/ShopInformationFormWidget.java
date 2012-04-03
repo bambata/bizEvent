@@ -13,6 +13,7 @@ import org.swfupload.client.SWFUpload.ButtonAction;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -24,6 +25,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.web.bindery.autobean.gwt.client.impl.ClientPropertyContext;
 import com.opportunity.mainsite.shared.ShopInformation;
 import com.opportunity.mainsite.shared.Error;
 
@@ -67,10 +69,10 @@ public class ShopInformationFormWidget extends Composite implements
 
 	@UiField
 	TextBox state;
-	
+
 	@UiField
 	Button startUploadButton;
-	
+
 	@UiField
 	TextBox email;
 
@@ -164,14 +166,10 @@ public class ShopInformationFormWidget extends Composite implements
 
 		// Configure the button to display
 		builder.setButtonPlaceholderID("upload");
-		builder.setButtonImageURL("XPButtonUploadText_61x22.png");
 		builder.setButtonWidth(61);
 		builder.setButtonHeight(22);
 		builder.setWindowMode(WindowMode.TRANSPARENT);
-		
-		Button addFileButton = new Button("Choose Files ...");
-		builder.setButtonText("tes");
-		
+
 		builder.setButtonTextLeftPadding(7);
 		builder.setButtonTextTopPadding(4);
 		builder.setSwfUrl(GWT.getModuleName() + "/swfupload.swf");

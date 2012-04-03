@@ -12,6 +12,9 @@
 
 	<!-- Other module inherits -->
 
+  <!-- Google Maps Api -->
+  <inherits name="com.google.gwt.maps.Apis_Google_Maps" />
+
 	<!-- JSR 303 Bean Validation -->
 	<inherits name='com.em.validation.Validation' />
 	<inherits name='com.google.gwt.validation.Validation' />
@@ -33,14 +36,11 @@
 
 	<!-- wrapper library for swfUpload -->
 	<inherits name="org.swfupload.SWFUpload" />
-	
-	<inherits name="com.google.gwt.maps.client.Apis_Google_Maps" />
 
 	<!-- Specify the app entry point class. -->
 	<entry-point class='com.opportunity.mainsite.client.MainSite' />
 
 	<stylesheet src="_com.opportunity.mainsite.css_" />
-
 
 	<!-- Deferred binding configuration -->
 	<replace-with

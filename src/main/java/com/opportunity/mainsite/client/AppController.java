@@ -13,18 +13,18 @@ import com.opportunity.mainsite.client.presenter.ShopInformationFormPresenter;
 
 @Singleton
 public class AppController implements Presenter, ValueChangeHandler<String> {
-	
+
 	private EventBus eventBus;
 
 	private HasWidgets container;
 
 	private ShopInformationFormPresenter shopInformationFormPresenter;
-	
+
 	@Inject
 	public AppController(EventBus eventBus) {
 
 		this.eventBus = eventBus;
-		
+
 		History.addValueChangeHandler(this);
 
 	}
@@ -41,11 +41,11 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	public void onValueChange(ValueChangeEvent<String> event) {
 
 	  if(event.getValue().equals(ApplicationGlobalState.shopRegistration.toString())){
-		  
+
 		  shopInformationFormPresenter = MainSiteGinjector.INSTANCE.getShopInformationFormPresenter();
-		  
+
 		  shopInformationFormPresenter.go(container);
-		  
+
 	  }
 
 	}
