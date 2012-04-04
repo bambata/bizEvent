@@ -13,8 +13,12 @@ import org.swfupload.client.SWFUpload.ButtonAction;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.maps.client.MapOptions;
+import com.google.gwt.maps.client.MapTypeId;
 import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiTemplate;
@@ -25,7 +29,6 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.web.bindery.autobean.gwt.client.impl.ClientPropertyContext;
 import com.opportunity.mainsite.shared.ShopInformation;
 import com.opportunity.mainsite.shared.Error;
 
@@ -81,6 +84,18 @@ public class ShopInformationFormWidget extends Composite implements
 	Error error;
 
 	SWFUpload swfUpload;
+
+	@UiFactory
+	public MapWidget makeMapWidget() {
+	
+		LatLng center = LatLng.newInstance(49.496675, -102.65625);
+		MapOptions opts = MapOptions.newInstance();
+		opts.setZoom(4);
+		opts.setCenter(center);
+		opts.setMapTypeId(MapTypeId.HYBRID);
+
+		return new MapWidget(opts);
+	}
 
 	private ShopInformationFormState widgetState = ShopInformationFormState.standard;
 
