@@ -13,8 +13,12 @@ import org.swfupload.client.SWFUpload.ButtonAction;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.maps.client.MapOptions;
+import com.google.gwt.maps.client.MapTypeId;
 import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiTemplate;
@@ -80,6 +84,8 @@ public class ShopInformationFormWidget extends Composite implements
 
 	Error error;
 
+	MapWidget map;
+
 	SWFUpload swfUpload;
 
 	private ShopInformationFormState widgetState = ShopInformationFormState.standard;
@@ -90,6 +96,18 @@ public class ShopInformationFormWidget extends Composite implements
 
 	public void setSuccessState() {
 		this.widgetState = ShopInformationFormState.success;
+	}
+
+	@UiFactory
+	MapWidget makeMapWidget() {
+
+	  LatLng center = LatLng.newInstance(47.8, -121.4);
+	  MapOptions opts = MapOptions.newInstance();
+    opts.setZoom(4);
+    opts.setCenter(center);
+    opts.setMapTypeId(MapTypeId.HYBRID);
+	  MapWidget toReturn = new MapWidget(MapOptions.newInstance());
+	  return toReturn;
 	}
 
 	@Override
@@ -166,8 +184,8 @@ public class ShopInformationFormWidget extends Composite implements
 
 		// Configure the button to display
 		builder.setButtonPlaceholderID("upload");
-		builder.setButtonWidth(61);
-		builder.setButtonHeight(22);
+		builder.setButtonWidth(startUploadButton.getOffsetWidth());
+		builder.setButtonHeight(startUploadButton.getOffsetHeight());
 		builder.setWindowMode(WindowMode.TRANSPARENT);
 
 		builder.setButtonTextLeftPadding(7);

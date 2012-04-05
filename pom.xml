@@ -60,13 +60,13 @@
     <dependency>
       <groupId>com.google.gwt.maps</groupId>
       <artifactId>gwt-maps-api-v3</artifactId>
-      <version>3.8.0-beta1-SNAPSHOT-patched</version>
+      <version>3.8.0-beta1-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>com.google.gwt.maps</groupId>
       <artifactId>gwt-maps-api-v3</artifactId>
-      <version>3.8.0-beta1-SNAPSHOT-patched</version>
+      <version>3.8.0-beta1-SNAPSHOT</version>
       <classifier>sources</classifier>
       <scope>provided</scope>
       <type>jar</type>
