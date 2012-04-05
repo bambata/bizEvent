@@ -63,16 +63,6 @@
       <version>3.8.0-beta1-SNAPSHOT</version>
     </dependency>
 
-    <dependency>
-      <groupId>com.google.gwt.maps</groupId>
-      <artifactId>gwt-maps-api-v3</artifactId>
-      <version>3.8.0-beta1-SNAPSHOT</version>
-      <classifier>sources</classifier>
-      <scope>provided</scope>
-      <type>jar</type>
-    </dependency>
-
-
     <!-- J2EE Servlet API. We need it to compile IndexServlet class. You
       can probably remove it, if you don't explicitly use Servlets. -->
     <dependency>
@@ -287,6 +277,12 @@
         <configuration>
           <style>DETAILED</style>
           <!-- <logLevel>TRACE</logLevel> -->
+
+          <compileSourcesArtifacts>
+            <compileSourcesArtifact>com.google.gwt.maps:Apis_Google_Maps</compileSourcesArtifact>
+            <compileSourcesArtifact>com.google.gwt.ajaxloader:AjaxLoader</compileSourcesArtifact>
+          </compileSourcesArtifacts>
+
         </configuration>
         <executions>
           <execution>
@@ -297,7 +293,6 @@
           </execution>
         </executions>
       </plugin>
-
 
       <!-- Upload application to the appspot automatically, during release:perform. -->
       <plugin>

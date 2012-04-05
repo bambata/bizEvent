@@ -29,7 +29,6 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.web.bindery.autobean.gwt.client.impl.ClientPropertyContext;
 import com.opportunity.mainsite.shared.ShopInformation;
 import com.opportunity.mainsite.shared.Error;
 
@@ -87,6 +86,18 @@ public class ShopInformationFormWidget extends Composite implements
 	MapWidget map;
 
 	SWFUpload swfUpload;
+
+	@UiFactory
+	public MapWidget makeMapWidget() {
+	
+		LatLng center = LatLng.newInstance(49.496675, -102.65625);
+		MapOptions opts = MapOptions.newInstance();
+		opts.setZoom(4);
+		opts.setCenter(center);
+		opts.setMapTypeId(MapTypeId.HYBRID);
+
+		return new MapWidget(opts);
+	}
 
 	private ShopInformationFormState widgetState = ShopInformationFormState.standard;
 
