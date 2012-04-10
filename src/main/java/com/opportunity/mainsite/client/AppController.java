@@ -8,12 +8,19 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.opportunity.mainsite.client.css.SkinCSSResource;
 import com.opportunity.mainsite.client.presenter.Presenter;
 import com.opportunity.mainsite.client.presenter.ShopInformationFormPresenter;
 
 @Singleton
 public class AppController implements Presenter, ValueChangeHandler<String> {
-
+	
+	@Inject
+	public static SkinCSSResource SKIN_CSS;
+	
+	@Inject
+	public static MainSiteResources MAIN_CSS;
+	
 	private EventBus eventBus;
 
 	private HasWidgets container;

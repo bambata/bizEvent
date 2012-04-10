@@ -40,45 +40,47 @@ public class ShopInformationFormWidget extends Composite implements
 	};
 
 	private static MyUIBinder uiBinder = GWT.create(MyUIBinder.class);
-
+	
+	private Map<String, Widget> propertyPathFieldMapping;
+	
 	Set<ConstraintViolation<ShopInformation>> violations;
 
 	@UiField
-	TextBox shopName;
+	InputField<TextBox> shopName;
 
 	@UiField
-	ListBox shopType;
+	InputField<ListBox> shopType;
 
 	@UiField
-	ListBox country;
+	InputField<ListBox> country;
 
 	@UiField
-	TextArea description;
+	InputField<TextArea> description;
 
 	@UiField
-	TextBox street;
+	InputField<TextBox> street;
 
 	@UiField
-	TextBox number;
+	InputField<TextBox> number;
 
 	@UiField
 	Button submitButton;
 
 	@UiField
-	TextBox zip;
+	InputField<TextBox> zip;
 
 	@UiField
-	TextBox city;
+	InputField<TextBox> city;
 
 	@UiField
-	TextBox state;
+	InputField<TextBox> state;
 
 	@UiField
 	Button startUploadButton;
 
 	@UiField
-	TextBox email;
-
+	InputField<TextBox> email;
+	
 	ShopInformationFormObserver presenter;
 
 	Error error;
@@ -109,18 +111,6 @@ public class ShopInformationFormWidget extends Composite implements
 		this.widgetState = ShopInformationFormState.success;
 	}
 
-	@UiFactory
-	MapWidget makeMapWidget() {
-
-	  LatLng center = LatLng.newInstance(47.8, -121.4);
-	  MapOptions opts = MapOptions.newInstance();
-    opts.setZoom(4);
-    opts.setCenter(center);
-    opts.setMapTypeId(MapTypeId.HYBRID);
-	  MapWidget toReturn = new MapWidget(MapOptions.newInstance());
-	  return toReturn;
-	}
-
 	@Override
 	public void setPresenter(ShopInformationFormObserver presenter) {
 		this.presenter = presenter;
@@ -131,7 +121,7 @@ public class ShopInformationFormWidget extends Composite implements
 		initWidget(uiBinder.createAndBindUi(this));
 
 	}
-
+	
 	@Override
 	public Widget toWidget() {
 		return this;
@@ -141,10 +131,10 @@ public class ShopInformationFormWidget extends Composite implements
 	void handleClick(ClickEvent evt) {
 
 		Map<String, String> info = new HashMap<String, String>();
-		info.put("shopName", shopName.getValue());
-		info.put("shopType", shopType.getValue(shopType.getSelectedIndex()));
-		info.put("street", street.getValue());
-		info.put("description", description.getValue());
+		info.put("shopName", shopName.getInput().getValue());
+		info.put("shopType", shopType.getInput().getValue(shopType.getInput().getSelectedIndex()));
+		info.put("street", street.getInput().getValue());
+		info.put("description", description.getInput().getValue());
 
 		presenter.onSubmitButtonClick(info);
 	}
@@ -156,13 +146,14 @@ public class ShopInformationFormWidget extends Composite implements
 
 	@UiHandler("clear")
 	public void clear(ClickEvent e) {
-		this.city.setText("");
-		this.state.setText("");
-		this.street.setText("");
-		this.zip.setText("");
-		this.description.setText("");
-		this.number.setText("");
-		this.shopName.setText("");
+		this.city.getInput().setText("");
+		this.state.getInput().setText("");
+		this.street.getInput().setText("");
+		this.zip.getInput().setText("");
+		this.description.getInput().setText("");
+		this.number.getInput().setText("");
+		this.shopName.getInput().setText("");
+		this.email.getInput().setText("");
 	}
 
 	public Set<ConstraintViolation<ShopInformation>> getViolations() {
@@ -205,6 +196,19 @@ public class ShopInformationFormWidget extends Composite implements
 		builder.setButtonAction(ButtonAction.SELECT_FILES);
 
 		swfUpload = builder.build();
+		
+		
+		//Initialize the mapping between property path and field
+//		propertyPathFieldMapping.put("/shopName", shopName);
+//		propertyPathFieldMapping.put("/country", country);
+//		propertyPathFieldMapping.put("/description", description);
+//		propertyPathFieldMapping.put("/street", street);
+//		propertyPathFieldMapping.put("/number", number);
+//		propertyPathFieldMapping.put("/zip", zip);
+//		propertyPathFieldMapping.put("/city", city);
+//		propertyPathFieldMapping.put("/state", state);
+//		propertyPathFieldMapping.put("/email", email);
+		
 	}
 
 }

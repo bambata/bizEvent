@@ -12,8 +12,8 @@
 
 	<!-- Other module inherits -->
 
-  <!-- Google Maps Api -->
-  <inherits name="com.google.gwt.maps.Apis_Google_Maps" />
+	<!-- Google Maps Api -->
+	<inherits name="com.google.gwt.maps.Apis_Google_Maps" />
 
 	<!-- JSR 303 Bean Validation -->
 	<inherits name='com.em.validation.Validation' />
@@ -21,10 +21,11 @@
 
 	<!-- for logging capability -->
 	<inherits name="com.google.gwt.logging.Logging" />
-  <set-property name="gwt.logging.consoleHandler" value="ENABLED" />
-  <set-property name="gwt.logging.developmentModeHandler" value="DISABLED" />
-  <set-property name="gwt.logging.popupHandler" value="DISABLED" />
-  <set-property name="gwt.logging.systemHandler" value="DISABLED" />
+	<set-property name="gwt.logging.consoleHandler" value="ENABLED" />
+	<set-property name="gwt.logging.developmentModeHandler"
+		value="DISABLED" />
+	<set-property name="gwt.logging.popupHandler" value="DISABLED" />
+	<set-property name="gwt.logging.systemHandler" value="DISABLED" />
 
 	<!-- I18N -->
 	<inherits name="com.google.gwt.i18n.I18N" />
@@ -40,11 +41,11 @@
 
 	<!-- wrapper library for swfUpload -->
 	<inherits name="org.swfupload.SWFUpload" />
+	
+	<inherits name="com.google.gwt.resources.Resources" />
 
 	<!-- Specify the app entry point class. -->
 	<entry-point class='com.opportunity.mainsite.client.MainSite' />
-
-	<stylesheet src="_com.opportunity.mainsite.css_" />
 
 	<!-- Deferred binding configuration -->
 	<replace-with
@@ -58,7 +59,6 @@
 	<source path='client' />
 
 	<source path='shared' />
-
 
 
 </module>
