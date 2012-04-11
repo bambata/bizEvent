@@ -44,7 +44,7 @@ public class ShopInformationFormWidget extends Composite implements
 	private Map<String, Widget> propertyPathFieldMapping;
 	
 	Set<ConstraintViolation<ShopInformation>> violations;
-
+	
 	@UiField
 	InputField<TextBox> shopName;
 
