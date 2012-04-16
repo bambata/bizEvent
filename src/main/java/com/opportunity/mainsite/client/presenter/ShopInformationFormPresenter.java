@@ -9,6 +9,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.http.client.Request;
@@ -16,6 +17,11 @@ import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
+import com.google.gwt.maps.client.services.Geocoder;
+import com.google.gwt.maps.client.services.GeocoderRequest;
+import com.google.gwt.maps.client.services.GeocoderRequestHandler;
+import com.google.gwt.maps.client.services.GeocoderResult;
+import com.google.gwt.maps.client.services.GeocoderStatus;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -42,6 +48,8 @@ public class ShopInformationFormPresenter implements
 	private Validator validator;
 
 	private EventBus applicationGlobalEventBus;
+	
+	private Geocoder geoCoder;
 
 	public ShopInformationFormPresenter() {
 
@@ -150,6 +158,37 @@ public class ShopInformationFormPresenter implements
 
 		}
 
+	}
+
+	@Override
+	public void getAdresseLocation(String humanReadableAddressSnipset) {
+		
+		geoCoder = Geocoder.newInstance();
+		
+		GeocoderRequest request = GeocoderRequest.newInstance();
+		
+		request.setAddress(humanReadableAddressSnipset);
+		
+		geoCoder.geocode(request, new GeocoderRequestHandler() {
+			
+			@Override
+			public void onCallback(JsArray<GeocoderResult> results,
+					GeocoderStatus status) {
+				
+				switch(status){
+					
+				case OK :
+					view.updateMap(results.get(0).getGeometry().getLocation());
+					break;
+				
+				default :
+					//do nothing at all
+				
+				}
+				
+			}
+		});
+		
 	}
 
 }

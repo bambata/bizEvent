@@ -5,17 +5,20 @@ import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 
+import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.user.client.ui.Widget;
 import com.opportunity.mainsite.shared.Error;
 import com.opportunity.mainsite.shared.ShopInformation;
 
 public interface ShopInformationForm {
 
-	interface ShopInformationFormObserver{
+	interface ShopInformationFormObserver {
 
 		public void onSubmitButtonClick(Map<String, String> formValues);
 
 		public void onAddedFile();
+		
+		public void getAdresseLocation(String humanReadableAddressSnipset);
 
 	}
 
@@ -25,14 +28,14 @@ public interface ShopInformationForm {
 
 	Widget toWidget();
 
-  void setWidgetState(ShopInformationFormState state);
+	void setWidgetState(ShopInformationFormState state);
 
-  void setWidgetState(ShopInformationFormState state, Error error);
+	void setWidgetState(ShopInformationFormState state, Error error);
+	
+	void updateMap(LatLng geolocation);
 
-  enum ShopInformationFormState {
-    success,
-    error,
-    standard
-  }
+	enum ShopInformationFormState {
+		success, error, standard
+	}
 
 }

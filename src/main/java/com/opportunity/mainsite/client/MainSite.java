@@ -39,7 +39,7 @@ public class MainSite implements EntryPoint {
 
   private void go() {
     AppController appController = MainSiteGinjector.INSTANCE.getAppController();
-
+    
     appController.go(RootPanel.get("shopForm"));
   }
 

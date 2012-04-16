@@ -11,14 +11,9 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.opportunity.mainsite.client.css.MainsiteCSSResource;
 import com.opportunity.mainsite.client.css.SkinCSSResource;
+import com.opportunity.mainsite.client.view.widget.InputField;
 
 public class MainSiteModule extends AbstractGinModule {
-	
-	static {
-		
-		
-		
-	}
 	
 	@Override
 	protected void configure() {
@@ -32,6 +27,8 @@ public class MainSiteModule extends AbstractGinModule {
 		bind(SkinCSSResource.class).toProvider(SkinResourceProvider.class);
 		
 		bind(MainsiteCSSResource.class).toProvider(MainSiteResourceProvider.class);
+		
+		requestStaticInjection(InputField.class);
 		
 	}
 	
