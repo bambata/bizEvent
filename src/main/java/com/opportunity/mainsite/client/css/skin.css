@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+
+.formInputField{
+
+}
+
+.formInputLabel{
+	width:150px;
+	text-align:right;	
+}
+
+.formInputValue > select{
+	margin-left:8px;	
+}
+
+.formInputValue > * {
+	width:150px;
+}
+		
+.formInputError{
+	
+}
+
+.formInputErrorMessage{
+
+}
