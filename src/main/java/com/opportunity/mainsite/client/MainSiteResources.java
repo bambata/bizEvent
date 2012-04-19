@@ -12,9 +12,10 @@ public interface MainSiteResources extends ClientBundle {
 	@Source("css/skin.css")
 	SkinCSSResource getSkinStyle();
 	
-	
 	@Source("css/mainsite.css")
 	MainsiteCSSResource getMainsiteStyle();
 	
+	@Source("constants")
+	ApplicationConstants getApplicationConstants();
 	
 }

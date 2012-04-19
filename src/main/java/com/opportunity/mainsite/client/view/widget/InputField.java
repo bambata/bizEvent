@@ -4,30 +4,30 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.opportunity.mainsite.client.MainSiteResources;
 import com.opportunity.mainsite.client.css.SkinCSSResource;
 
-public class InputField extends Widget implements HasWidgets {
+public class InputField extends Composite implements HasWidgets {
+
+	private static final String INPUT_FIELD_HTML_STRUCTURE = "<table><tr><td><span id='label'></span></td><td><span id='input'></span></td></tr></table>";
+
+	private HTMLPanel container = new HTMLPanel(INPUT_FIELD_HTML_STRUCTURE);
+
+	private Label label;
 
 	private Widget input;
 
-	private String label;
-
-	private String errorMessage;
-
-	private Element firstColumn;
-
-	private Element secondColumn;
-
-	private Element row;
-
-	private List<Widget> listofWidget;
+	private Label errorMessage;
+	
+	private String styleName;
+	
+	private List<Widget> listOfComposedWidgets = new ArrayList<Widget>(2);
 
 	@Inject
 	static SkinCSSResource skin;
@@ -41,114 +41,122 @@ public class InputField extends Widget implements HasWidgets {
 
 	public InputField() {
 
-		this(Document.get().createTableElement(), skin.formInputField());
+		container.setStyleName(skin.formInputField(), true);
+
+		initWidget(container);
 
 	}
 
-	public InputField(Element container, String styleName) {
+	public InputField(String label, String styleName) {
 
 		super();
 
-		setElement(container);
+		container.setStyleName(skin.formInputField(), true);
 
 		if (styleName != null)
-			setStyleName(styleName);
+			container.setStyleName(styleName, true);
 
-		// set up the row but don't attach it
-		row = DOM.createTR();
+		initWidget(container);
 
-		firstColumn = DOM.createTD();
-		firstColumn.setClassName(skin.formInputLabel());
-		row.appendChild(firstColumn);
-
-		secondColumn = DOM.createTD();
-		secondColumn.setClassName(skin.formInputValue());
-		row.appendChild(secondColumn);
-		
 	}
 
 	public Widget getInput() {
 		return input;
 	}
 
-	public void setLabel(String label) {
-		this.label = label;
-		firstColumn.setInnerText(label + " :");
-		
-		
-		//physically attach the widget
-		if (!getElement().isOrHasChild(row))
-			getElement().appendChild(row);
+	public HTMLPanel getContainer() {
+		return container;
 	}
 
-	public String getLabel() {
+	public Label getLabel() {
 		return label;
 	}
 
-	public void setErrorMessage(String errorMessage) {
-		getElement().addClassName(skin.formInputError());
-		this.errorMessage = errorMessage;
+	public void setLabel(Label label) {
 
-		Element divErrorMessage = DOM.createDiv();
-		divErrorMessage.setClassName(skin.formInputErrorMessage());
-		divErrorMessage.setInnerText(errorMessage);
+		if (this.label == null) {
+			this.label = label;
+			this.label.setStyleName(skin.formInputLabel(), true);
 
-		secondColumn.appendChild(divErrorMessage);
+			container.addAndReplaceElement(label, "label");
 
-		if (!getElement().isOrHasChild(row))
-			getElement().appendChild(row);
+			if (listOfComposedWidgets.isEmpty())
+				listOfComposedWidgets.add(label);
+			else
+				listOfComposedWidgets.set(0, label);
+		}
+
 	}
 
-	public void removeErrorMessage() {
-		getElement().removeClassName(skin.formInputError());
-		this.errorMessage = null;
-	}
-
-	public String getErrorMessage() {
+	public Label getErrorMessage() {
 		return errorMessage;
 	}
 
-	public void addInputFieldCustomClassName(String className) {
-		this.getElement().addClassName(className);
+	public void setErrorMessage(Label errorMessage) {
+		this.errorMessage = errorMessage;
 	}
 
-	public void addLabelCustomClassName(String className) {
-		firstColumn.addClassName(className);
+	public static SkinCSSResource getSkin() {
+		return skin;
 	}
 
-	public void addValueCustomClassName(String className) {
-		secondColumn.addClassName(className);
+	public static void setSkin(SkinCSSResource skin) {
+		InputField.skin = skin;
+	}
+
+	public void setInput(Widget input) {
+		
+		if (this.input == null) {
+			this.input = input;
+			input.setStyleName(skin.formInputValue(), true);
+			container.addAndReplaceElement(input, "input");
+
+			if (listOfComposedWidgets.isEmpty())
+				listOfComposedWidgets.add(new Label("Label"));
+			else if (listOfComposedWidgets.size() == 1)
+				listOfComposedWidgets.add(input);
+			else if (listOfComposedWidgets.size() > 1)
+				listOfComposedWidgets.set(1, input);
+		}
 	}
 
 	@Override
 	public void add(Widget w) {
-		input = w;
-
-		secondColumn.appendChild(input.getElement());
-
-		if (!getElement().isOrHasChild(row))
-			getElement().appendChild(row);
+		if (w instanceof Label)
+			setLabel((Label) w);
+		else
+			setInput(w);
 	}
 
 	@Override
 	public void clear() {
+		listOfComposedWidgets = new ArrayList<Widget>();
 		input = null;
+		label = null;
+		container = new HTMLPanel(INPUT_FIELD_HTML_STRUCTURE);
 	}
 
 	@Override
 	public Iterator<Widget> iterator() {
-
-		if (listofWidget == null)
-			listofWidget = new ArrayList<Widget>();
-
-		listofWidget.add(input);
-		return listofWidget.iterator();
+		return listOfComposedWidgets.iterator();
 	}
 
 	@Override
 	public boolean remove(Widget w) {
-		input = null;
-		return input == null;
+		if (w == input) {
+			input = null;
+			return listOfComposedWidgets.remove(w);
+		}
+		return false;
+	}
+	
+	public String getStyleName() {
+		return styleName;
+	}
+
+	public void setStyleName(String styleName) {
+		this.styleName = styleName;
+		container.setStyleName(styleName, true);
 	}
 
 }

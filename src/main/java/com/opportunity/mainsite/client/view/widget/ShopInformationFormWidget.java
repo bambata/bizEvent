@@ -14,18 +14,19 @@ import org.swfupload.client.event.UploadProgressHandler;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.maps.client.MapOptions;
 import com.google.gwt.maps.client.MapTypeId;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.base.LatLng;
+import com.google.gwt.maps.client.base.LatLngBounds;
+import com.google.gwt.maps.client.overlays.Marker;
+import com.google.gwt.maps.client.overlays.MarkerOptions;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiTemplate;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
@@ -82,20 +83,20 @@ public class ShopInformationFormWidget extends Composite implements
 
 	@UiField
 	TextBox email;
-	
-	@UiField
-	TextBox test;
 
 	ShopInformationFormObserver presenter;
 
 	Error error;
+	
+	Marker shopMarker;
 
+	@UiField
 	MapWidget map;
 
 	SWFUpload swfUpload;
 
-	StringBuilder locationForGoogleMaps = new StringBuilder();
-	
+	private ShopInformationFormState widgetState = ShopInformationFormState.standard;
+
 	@UiFactory
 	public MapWidget makeMapWidget() {
 
@@ -107,8 +108,6 @@ public class ShopInformationFormWidget extends Composite implements
 
 		return new MapWidget(opts);
 	}
-
-	private ShopInformationFormState widgetState = ShopInformationFormState.standard;
 
 	public ShopInformationFormObserver getPresenter() {
 		return presenter;
@@ -139,8 +138,23 @@ public class ShopInformationFormWidget extends Composite implements
 	}
 
 	@Override
-	public void updateMap(LatLng geolocation) {
+	public void updateMap(LatLng geolocation, LatLngBounds viewport,
+			Map<String, String> address) {
+		
 		map.setCenter(geolocation);
+
+		map.fitBounds(viewport);
+		
+		
+		if(!street.getValue().isEmpty() && !city.getValue().isEmpty() && !number.getValue().isEmpty() && !zip.getValue().isEmpty()){
+			if(shopMarker != null)
+				shopMarker.close();
+			
+			MarkerOptions opts = MarkerOptions.newInstance();
+			opts.setPosition(geolocation);
+			opts.setMap(map);
+			shopMarker = Marker.newInstance(opts);
+		}
 	}
 
 	@Override
@@ -180,19 +194,18 @@ public class ShopInformationFormWidget extends Composite implements
 		builder.setButtonTextTopPadding(4);
 		builder.setSwfUrl(GWT.getModuleName() + "/swfupload.swf");
 		builder.setButtonAction(ButtonAction.SELECT_FILES);
-		
-		builder.setUploadProgressHandler(new UploadProgressHandler(){
+
+		builder.setUploadProgressHandler(new UploadProgressHandler() {
 
 			@Override
 			public void onUploadProgress(UploadProgressEvent e) {
 				e.getFile().getName();
 			}
-			
+
 		});
-		
+
 		swfUpload = builder.build();
-		
-		
+
 		// Initialize the mapping between property path and field
 		// propertyPathFieldMapping.put("/shopName", shopName);
 		// propertyPathFieldMapping.put("/country", country);
@@ -203,17 +216,7 @@ public class ShopInformationFormWidget extends Composite implements
 		// propertyPathFieldMapping.put("/city", city);
 		// propertyPathFieldMapping.put("/state", state);
 		// propertyPathFieldMapping.put("/email", email);
-		
-		street.addChangeHandler(new ChangeHandler() {
-			
-			@Override
-			public void onChange(ChangeEvent event) {
-				
-				handleNumberChange(event);
-				
-			}
-		});
-		
+
 	}
 
 	// Handlers
@@ -223,8 +226,13 @@ public class ShopInformationFormWidget extends Composite implements
 		Map<String, String> info = new HashMap<String, String>();
 		info.put("shopName", shopName.getValue());
 		info.put("shopType", shopType.getValue(shopType.getSelectedIndex()));
+		info.put("country", country.getValue(country.getSelectedIndex()));
+		info.put("zip", zip.getValue());
+		info.put("number", number.getValue());
 		info.put("street", street.getValue());
 		info.put("description", description.getValue());
+		info.put("city", city.getValue());
+		info.put("email", email.getValue());
 
 		presenter.onSubmitButtonClick(info);
 	}
@@ -244,47 +252,20 @@ public class ShopInformationFormWidget extends Composite implements
 		this.shopName.setText("");
 		this.email.setText("");
 	}
-	
-	@UiHandler("test")
-	public void handleTest(ChangeEvent e){
-		Window.alert("Yo");
-	}
 
-	@UiHandler("country")
-	public void handleCountryChange(ChangeEvent e) {
-		locationForGoogleMaps.append(country.getValue(country
-				.getSelectedIndex()) + " ");
-		updateMapCenter(locationForGoogleMaps.toString());
-	}
-	
-	@UiHandler("city")
-	public void handleCityChange(ChangeEvent e) {
-		locationForGoogleMaps.append(city.getValue() + " ");
-		updateMapCenter(locationForGoogleMaps.toString());
-	}
+	@UiHandler( { "country", "city", "zip", "street", "number" })
+	public void handleAdresseChange(ChangeEvent e) {
 
-	@UiHandler("zip")
-	public void handleZipChange(ChangeEvent e) {
-		locationForGoogleMaps.append(zip.getValue() + " ");
-		updateMapCenter(locationForGoogleMaps.toString());
-	}
+		StringBuilder addressBuilder = new StringBuilder();
 
-	/*@UiHandler("street")
-	public void handleStreetChange(ChangeEvent e) {
-		locationForGoogleMaps.append(street.getValue() + " ");
-		updateMapCenter(locationForGoogleMaps.toString());
-	}*/
+		addressBuilder.append(number.getValue() + ", ");
+		addressBuilder.append(street.getValue() + ", ");
+		addressBuilder.append(zip.getValue() + ", ");
+		addressBuilder.append(city.getValue() + ", ");
+		addressBuilder.append(country.getValue(country.getSelectedIndex())
+				+ ", ");
 
-	@UiHandler("number")
-	public void handleNumberChange(ChangeEvent e) {
-		locationForGoogleMaps.append(number.getValue() + " ");
-		updateMapCenter(locationForGoogleMaps.toString());
-	}
-
-	private void updateMapCenter(String choosedCountry) {
-		
-		presenter.getAdresseLocation(locationForGoogleMaps.toString());
-		
+		presenter.getAddressLocation(addressBuilder.toString());
 	}
 
 }

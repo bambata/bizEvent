@@ -1,5 +1,6 @@
 package com.opportunity.mainsite.client.presenter;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
@@ -18,6 +19,7 @@ import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
 import com.google.gwt.maps.client.services.Geocoder;
+import com.google.gwt.maps.client.services.GeocoderAddressComponent;
 import com.google.gwt.maps.client.services.GeocoderRequest;
 import com.google.gwt.maps.client.services.GeocoderRequestHandler;
 import com.google.gwt.maps.client.services.GeocoderResult;
@@ -33,7 +35,8 @@ public class ShopInformationFormPresenter implements
 		ShopInformationForm.ShopInformationFormObserver, Presenter {
 
 	private static final String SHOP_MANAGEMENT_SHOP_PERSISTER = GWT
-			.getModuleBaseURL() + "shopManagementService/shop/create";
+			.getModuleBaseURL()
+			+ "shopManagementService/shop/create";
 
 	private static final String FILE_SERVICE_CALLBACK = GWT.getModuleBaseURL()
 			+ "fileService/callbackUrl";
@@ -48,7 +51,7 @@ public class ShopInformationFormPresenter implements
 	private Validator validator;
 
 	private EventBus applicationGlobalEventBus;
-	
+
 	private Geocoder geoCoder;
 
 	public ShopInformationFormPresenter() {
@@ -94,6 +97,9 @@ public class ShopInformationFormPresenter implements
 		info.setStreet(values.get("street"));
 		info.setShopName(values.get("shopName"));
 		info.setShopType(values.get("shopType"));
+		info.setEmail(values.get("email"));
+		info.setZipCode(values.get("zip"));
+		info.setCity(values.get("city"));
 
 		// validate the bean
 		Set<ConstraintViolation<ShopInformation>> violations = validator
@@ -115,8 +121,8 @@ public class ShopInformationFormPresenter implements
 							@Override
 							public void onError(Request request,
 									Throwable exception) {
-								logger.log(Level.WARNING,
-										exception.getMessage());
+								logger.log(Level.WARNING, exception
+										.getMessage());
 							}
 
 							@Override
@@ -127,7 +133,8 @@ public class ShopInformationFormPresenter implements
 
 								// Request successfully processed
 								case 200:
-									view.setWidgetState(ShopInformationForm.ShopInformationFormState.success);
+									view
+											.setWidgetState(ShopInformationForm.ShopInformationFormState.success);
 									break;
 
 								// functional error
@@ -161,34 +168,67 @@ public class ShopInformationFormPresenter implements
 	}
 
 	@Override
-	public void getAdresseLocation(String humanReadableAddressSnipset) {
-		
+	public void getAddressLocation(String humanReadableAddressSnipset) {
+
 		geoCoder = Geocoder.newInstance();
-		
+
 		GeocoderRequest request = GeocoderRequest.newInstance();
-		
+
 		request.setAddress(humanReadableAddressSnipset);
-		
+
 		geoCoder.geocode(request, new GeocoderRequestHandler() {
-			
+
 			@Override
 			public void onCallback(JsArray<GeocoderResult> results,
 					GeocoderStatus status) {
-				
-				switch(status){
-					
-				case OK :
-					view.updateMap(results.get(0).getGeometry().getLocation());
+
+				switch (status) {
+
+				case OK:
+					JsArray<GeocoderAddressComponent> addressComponent = results
+							.get(0).getAddress_Components();
+
+					Map<String, String> addressComponents = new HashMap<String, String>();
+					for (int i = 0; i < addressComponent.length(); i++) {
+						for (int j = 0; j < addressComponent.get(i).getTypes()
+								.length(); j++) {
+							String type = addressComponent.get(i).getTypes()
+									.get(j);
+							if ("locality".equals(type)) {
+								addressComponents.put("city", addressComponent
+										.get(i).getShort_Name());
+								break;
+							} else if ("postal_code".equals(type)) {
+								addressComponents.put("zip", addressComponent
+										.get(i).getShort_Name());
+								break;
+							} else if ("country".equals(type)) {
+								addressComponents
+										.put("country", addressComponent.get(i)
+												.getShort_Name());
+								break;
+							} else if ("street".equals(type)) {
+								addressComponents
+										.put("street_address", addressComponent
+												.get(i).getShort_Name());
+								break;
+							}
+						}
+					}
+
+					view.updateMap(results.get(0).getGeometry().getLocation(),
+							results.get(0).getGeometry().getViewPort(),
+							addressComponents);
 					break;
-				
-				default :
-					//do nothing at all
-				
+
+				default:
+					// do nothing at all
+
 				}
-				
+
 			}
 		});
-		
+
 	}
 
 }

@@ -6,9 +6,11 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.maps.client.LoadApi;
 import com.google.gwt.maps.client.LoadApi.LoadLibrary;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 public class MainSite implements EntryPoint {
-
+  
   @Override
   public void onModuleLoad() {
 

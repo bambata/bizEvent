@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 
 import com.google.gwt.maps.client.base.LatLng;
+import com.google.gwt.maps.client.base.LatLngBounds;
 import com.google.gwt.user.client.ui.Widget;
 import com.opportunity.mainsite.shared.Error;
 import com.opportunity.mainsite.shared.ShopInformation;
@@ -18,7 +19,7 @@ public interface ShopInformationForm {
 
 		public void onAddedFile();
 		
-		public void getAdresseLocation(String humanReadableAddressSnipset);
+		public void getAddressLocation(String humanReadableAddressSnipset);
 
 	}
 
@@ -32,7 +33,7 @@ public interface ShopInformationForm {
 
 	void setWidgetState(ShopInformationFormState state, Error error);
 	
-	void updateMap(LatLng geolocation);
+	void updateMap(LatLng geolocation, LatLngBounds viewport, Map<String, String> addressComponent);
 
 	enum ShopInformationFormState {
 		success, error, standard

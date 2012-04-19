@@ -11,7 +11,8 @@
 	<!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/> -->
 
 	<!-- Other module inherits -->
-
+	<inherits name='com.google.gwt.ajaxloader.AjaxLoader'/>
+	
 	<!-- Google Maps Api -->
 	<inherits name="com.google.gwt.maps.Apis_Google_Maps" />
 

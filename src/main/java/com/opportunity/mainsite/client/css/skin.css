@@ -5,7 +5,7 @@
 }
 
 .formInputLabel{
-	width:150px;
+	width:90px;
 	text-align:right;	
 }
 
@@ -13,8 +13,8 @@
 	margin-left:8px;	
 }
 
-.formInputValue > * {
-	width:150px;
+.formInputValue {
+	width:140px;
 }
 		
 .formInputError{

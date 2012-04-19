@@ -232,7 +232,14 @@
 			<artifactId>gin</artifactId>
 			<version>1.5.0</version>
 		</dependency>
-
+		
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.9.0</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -312,6 +319,16 @@
 					<style>DETAILED</style>
 					<!-- <logLevel>TRACE</logLevel> -->
 					<!-- <extraJvmArgs>-Dgwt.validation.included.ModelPackages=javax.validation.constraints,com.em.validation.client.constraints,com.opportunity.mainsite.shared</extraJvmArgs> -->
+					
+					<compileSourcesArtifacts>
+						<compileSourcesArtifact>com.google.gwt.inject:gin</compileSourcesArtifact>
+						<compileSourcesArtifact>javax.validation:validation-api</compileSourcesArtifact>
+					</compileSourcesArtifacts>
+					
+					<!-- Main module -->
+					<!-- <module>com.opportunity.mainsite.MainSite</module> -->
+					<!-- <module>com.opportunity.mainsite.MainSiteForTests</module> -->
+					
 				</configuration>
 				<executions>
 					<execution>
@@ -321,6 +338,9 @@
 						</goals>
 					</execution>
 				</executions>
+				
+				
+				
 			</plugin>
 
 			<!-- Upload application to the appspot automatically, during release:perform. -->
